@@ -5,7 +5,7 @@ SESSION_CONFIGS = [
         name="EWE",
         app_sequence=["A_Intro", "B_EWE", "C_HLPL", "D_Outro"],
         num_demo_participants=2,
-        num_rounds=4,
+        num_rounds=10,
         group_size=2,
         efficiency_factor=1.5,
         risk=0.2,
@@ -32,10 +32,12 @@ SESSION_CONFIGS = [
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=0.02,
     participation_fee=2.00,
+    timeout_seconds = [300, 180, 150, 150, 150, 150, 150, 150, 150, 150],
     doc=""
 )
 
 PARTICIPANT_FIELDS = ["wait_page_arrival",
+                      "is_dropout",
                       "waited_too_long",
                       "stock",
                       "euros",

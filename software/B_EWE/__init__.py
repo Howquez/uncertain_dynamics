@@ -39,6 +39,7 @@ class Group(BaseGroup):
     # extreme weather variables
     EWE = models.BooleanField(initial=False, doc="if true, extreme weather event occurred")
     damage_factor = models.FloatField(doc="how much of an individual's income will be destroyed by an EWE")
+    bot_active_in_next_round = models.BooleanField(initial=False, doc="indicates whether a bot is active due to another group member's timeout.")
 
 
 class Player(BasePlayer):
@@ -55,11 +56,17 @@ class Player(BasePlayer):
                                         initial=False)
     calculator_time=models.FloatField(doc="Counts the cumulative number of seconds the calculator was opened.",
                                       initial=0)
+    dropout=models.BooleanField(doc="Documents whether a participant dropped out (e.g. due to a timeout).", initial=False)
 
 
 
 
 # FUNCTIONS
+def creating_session(subsession):
+    # read data (from seesion config)
+    for player in subsession.get_players():
+        player.participant.is_dropout = False
+
 def waiting_too_long(player):
     participant = player.participant
     import time
@@ -100,6 +107,9 @@ def set_group_variables(group: Group):
         else:
             group.wealth = sum([math.ceil(p.in_round(p.round_number - 1).stock) for p in group.get_players()])
 
+        if group.wealth < 0:
+            group.wealth = 0
+
         # extreme weather events
         a = random.randint(0, 100)
         if a < group.session.config["risk"] * 100:
@@ -108,14 +118,23 @@ def set_group_variables(group: Group):
 
 
 def set_payoffs(group: Group):
-    set_group_variables(group)
-    for p in group.get_players(): # calculate player-level-variables
-
+    for p in group.get_players():
         if p.round_number == 1:
             p.endowment = p.session.config["initial_endowment"]
             p.participant.stock = [20]
         else:
             p.endowment = int(math.ceil(p.in_round(p.round_number - 1).stock))
+
+        if p.endowment < 0:
+            p.endowment = 0
+            if p.participant.is_dropout == True:
+                p.contribution = 0
+        else:
+            if p.participant.is_dropout == True:
+                p.contribution = random.randint(0, p.endowment)
+
+    set_group_variables(group)
+    for p in group.get_players(): # calculate player-level-variables
 
         # prepare for bad weather
         p.MPCR = round(p.session.config["efficiency_factor"] / C.PLAYERS_PER_GROUP - p.session.config["damage"] * p.session.config["risk"] * p.endowment / p.group.wealth, 2)
@@ -169,6 +188,7 @@ class B_Decision(Page):
         if player.round_number > 1:
             endowment = int(math.ceil(player.in_round(player.round_number - 1).stock))
             diff = player.in_round(player.round_number - 1).gain
+            bot_active = player.in_round(player.round_number - 1).group.bot_active_in_next_round
             ewe = player.in_round(player.round_number - 1).group.EWE
             wealth = sum([p.in_round(p.round_number - 1).stock for p in player.group.get_players()])
             total_damage = player.in_round(player.round_number - 1).total_damage
@@ -212,6 +232,29 @@ class B_Decision(Page):
             damage=player.session.config["damage"],
             factor=round(player.session.config["efficiency_factor"] / C.PLAYERS_PER_GROUP - player.session.config["damage"] * player.session.config["risk"] * endowment / wealth, 2),
         )
+
+    @staticmethod
+    def get_timeout_seconds(player):
+        if player.participant.is_dropout:
+            return 1  # instant timeout, 1 second
+        else:
+            return player.session.config['timeout_seconds'][player.round_number - 1]
+
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        if timeout_happened:
+            player.dropout = True
+            player.participant.is_dropout = True
+            player.group.bot_active_in_next_round = True
+            if player.round_number == C.NUM_ROUNDS:
+                player.participant.vars["dPGG_payoff"] = 0
+                player.participant.vars["mpl_payoff"] = 0
+
+    @staticmethod
+    def app_after_this_page(player, upcoming_apps):
+        if player.round_number == C.NUM_ROUNDS:
+            if player.participant.is_dropout == True:
+                return upcoming_apps[-1]
 
 
 class C_ResultsWaitPage(WaitPage):

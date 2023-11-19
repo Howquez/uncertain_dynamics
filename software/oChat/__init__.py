@@ -120,7 +120,7 @@ class C_Chat(Page):
 
     @staticmethod
     def get_timeout_seconds(player):
-        return 300 # player.session.config['timer'] * 60
+        return 300 # player.session.config['timer.js'] * 60
 
     @staticmethod
     def live_method(player: Player, data):

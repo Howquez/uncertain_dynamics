@@ -23,12 +23,19 @@
                     <tr>
                         <th scope="row">Earnings</th>
                         <td class="text-secondary">
-                            <small>
+                            {{ if participant.vars.is_dropout }}
+                             <small>
+                                 Unfortunately, you dropped out of the experiment. For this reason, we were not able to
+                                 collect any data of you or your group members and cannot reimburse you.
+                            </small>
+                            {{ else }}
+                             <small>
                                 You will receive a fixed fee of {{ session.config.participation_fee }} for
                                 your participation. In addition, you'll earn {{ participant.vars.dPGG_payoff }} as a
-                                result of the group experiment as well as {{ participant.vars.mpl_payoff }}.
-                                This results in a total payoff of {{ final_payoff }}
+                                result of the group experiment as well as {{ participant.vars.mpl_payoff }} for the other task.
+                                This results in a total payoff of {{ final_payoff }}.
                             </small>
+                            {{ endif }}
                         </td>
                     </tr>
                     <tr>
