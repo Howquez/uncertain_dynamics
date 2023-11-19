@@ -1,0 +1,21 @@
+{{ extends "otree/WaitPage.html" }}
+
+{{ block content }}
+    <p>
+        You answered all questions correctly.
+    </p>
+    <p class="lead">
+        You are now going to be matched with other participants to form a group. This may take a few minutes.
+    </p>
+    <p>
+        <small>
+            {{ if player.wait_time_left > 1 %}
+            If this process takes more than {{ player.wait_time_left }} minutes
+            {{ else }}
+            If this process takes more than a minute
+            {{ endif }}
+            you will be directed to the end of the study. In that case we will reward you with a patience bonus of
+            {{ C.PATIENCE_BONUS }} points.
+        </small>
+    </p>
+{{ endblock }}

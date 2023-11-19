@@ -1,0 +1,102 @@
+<p>
+    Your decision screen will look as follows: You will see your endwoment in the top left panel;
+    your quota is displayed in the top right panel; your actual decision is made in the central panel, where you have an
+    input field on the left as well as a button (that submits your decision) on the right.
+</p>
+
+<p>
+    In addition, there may be a red panel that shows up if an event occured. Finally, you will also see a panel informing you
+    about the other group members' decision (from round 2 on).
+</p>
+
+
+<div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-10 col-lg-10">
+
+                <!-- Info Cards -->
+                <div class="container p-0 mt-3">
+                    <div class="row">
+                        <!-- Personal Info -->
+                        <div class="col col-6">
+                            <div class="card shadow-sm h-100 bg-light rounded-0">
+                                <div class="card-body">
+                                    <p class="h5">
+                                        <small class="text-muted">Your current endowment:</small> 20
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MPCR -->
+                        <div class="col col-6">
+                            <div class="card shadow-sm h-100 rounded-0">
+                                <div class="card-body">
+                                    <small class="text-secondary">
+                                        You will receive
+                                    </small>
+                                    <p class="h5 m-2">
+                                        46.67%
+                                    </p>
+                                    <small class="text-secondary">
+                                        of the tokens allocated to the group account in this period.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Warning -->
+                <div class="alert alert-danger mt-3 rounded-0 shadow-sm" role="alert">
+                    <small>
+                        An event occured.
+                        This caused a damage and diminished your endowment.
+                    </small>
+                </div>
+
+                <!-- Decision Card -->
+                <div class="card rounded mt-3 shadow-lg">
+                    <div class="card-body">
+
+                        <p class="h3">
+                            Your Decision
+                        </p>
+
+                        <p class="card-text mb-1 text-secondary">
+                            From these 20 tokens you can allocate any amount you want to the group account or keep
+                            everything (in your private account).
+                        </p>
+
+                        <p class="mb-4 text-secondary">
+                            <small>
+                                The tokens you keep, that is, the tokens you allocate to your private account, will
+                                remain unchanged until the next period.
+                            </small>
+                        </p>
+
+                        <div class="container-fluid p-0 m-0">
+                            <div class="row align-items-center">
+                                <div class="col m-0">
+                                    <input type="number" class="form-control m-0 border-primary" placeholder="Allocation" id="id_contribution" name="contribution" min="0"
+                                           data-container="body" data-toggle="popover" data-placement="bottom" data-content="You can contribute up to 20 tokens in this period.">
+                                </div>
+                                <div class="col m-0">
+                                    <button type="button" id="submit_button" class="btn-primary btn m-0 w-100" disabled>
+                                        To Group Account
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<p class="mt-5">
+    On top of that, you will see a header similar to the one you see right now. It will also show these icons
+    (<i class="bi bi-calculator"></i> and <i class="bi bi-info-circle-fill"></i>).
+    In addition, the header will tell you the period as well as the fixed probability of events.
+</p>

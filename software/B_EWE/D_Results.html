@@ -1,0 +1,91 @@
+
+{{ block scripts }}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<script src="{% static 'global/js/basics.js' %}"></script>
+<script src="{% static 'global/js/time_series.js' %}"></script>
+{{ endblock }}
+
+{{ block content }}
+<body class="bg-light.bg-gradient">
+    <img src="https://github.githubassets.com/images/modules/site/actions/hero-bg.jpg" id="bg" alt="" style="z-index: -1; position: fixed; left: 30; opacity: 0.90;">
+
+    <!-- Header -->
+    <nav class="navbar navbar-inverse m-0 p-0 sticky-top mb-4 justify-content-between bg-white shadow-sm" style="z-index:1">
+        <h5>
+                <span class="badge rounded-pill mt-4 ms-3 bg-dark shadow" data-toggle="tooltip" data-placement="bottom" title="Period {{ player.round_number }}">
+                    Last period
+                </span>
+        </h5>
+        <div class="me-3" style="cursor: pointer;">
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-8 col-md-8 col-lg-6">
+
+                <!-- Info Card -->
+                <div class="card mt-3 shadow-lg">
+                    <div class="card-body">
+                        <p class="h3">
+                            Almost done
+                        </p>
+                        <p class="text-secondary">
+                            You completed all {{ player.round_number }} periods. This page explains, how much you earned in
+                            each of them.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Viz Card -->
+                <div class="card mt-3 shadow-lg">
+                    <div class="card-body">
+                        <p class="h3">
+                            Your earnings over time
+                        </p>
+                        <figure class="highcharts-figure mb-1">
+                            <div id="container"></div>
+                        </figure>
+
+                        <table class="table table-hover table-responsive-md">
+                            <thead>
+                            <td class="text-secondary">Period</td>
+                            <td class="text-secondary">Endowment</td>
+                            <td class="text-secondary">Contribution</td>
+                            <td class="text-secondary">Return</td>
+                            <td class="text-secondary">Stock</td>
+                            </thead>
+                            <tbody>
+                            {% for p in player.in_all_rounds %}
+                            <tr>
+                                <td><small>
+                                    <span class="badge bg-secondary">
+                                        #{{ p.round_number }}
+                                    </span>
+                                </small></td>
+                                <td class="text-center text-secondary"><small>{{ p.endowment }}</small></td>
+                                <td class="text-center text-secondary"><small>{{ p.contribution }}</small></td>
+                                <td class="text-center text-secondary"><small>{{ p.group.individual_share }}</small></td>
+                                <td class="text-center text-secondary" data-toggle="tooltip" data-placement="top" title="={{ p.endowment }}-{{ p.contribution }}+{{ p.group.individual_share }}"><small> {{ p.stock }} </small></td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="d-flex justify-content-center m-5">
+                        <button class="btn btn-primary shadow" type="submit" id="submitButton" style="border-radius: 40px;">
+                            Next
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+{{ endblock }}

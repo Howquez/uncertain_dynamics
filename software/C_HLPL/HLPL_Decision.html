@@ -1,0 +1,166 @@
+{{ block scripts }}
+<script src="{% static 'global/js/modal_with_timer.js' %}"></script>
+{{ endblock }}
+
+{{ block global_styles  }}
+<style>
+    .otree-title {
+        display: none;
+        }
+</style>
+{{ endblock }}
+
+{{ block styles }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+{{ endblock }}
+
+
+{{ block content }}
+<body class="bg-light.bg-gradient">
+
+    <!-- Header -->
+    <nav class="navbar navbar-inverse sticky-top bg-white border-bottom justify-content-between" style="z-index:1">
+        <h5 class="text-center">
+            Trade-offs
+        </h5>
+        <div class="me-2 text-secondary" style="cursor: pointer;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="dark" class="bi bi-info-circle-fill ms-2" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#modal" aria-controls="modal" id="instructions_icon">
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+            </svg>
+        </div>
+    </nav>
+
+    <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="mt-3">
+                        Task
+                    </h4>
+
+                    <p class="mb-2">
+                        The underlying screen displays a table. In each row you have the choice between two alternatives
+                        (left. vs. right).
+
+                        The left column shows you an 'all-or-nothing' (virtual) coin toss where you can earn 50 tokens
+                        with a probability of 50% (or nothing otherwise).
+                        The right column displays a variety of payments you can receive with certainty.
+                    </p>
+                    <p class="mb-2">
+                        To make your decision, you'll start in the first row to indicate which of the two alternatives you prefer.
+                        Afterwards, you proceed with the second row, then with the third, and so on.
+                        The coin toss will always yield the same outcome while the certain payments in the right column
+                        increase from row to row.
+                    </p>
+
+                    <h4 class="mt-3">
+                        Payment
+                    </h4>
+
+                    <p class="mb-2">
+                        After you entered all your decisions, the computer randomly choose one of the rows.
+                        Depending on whether you prefered the left or right column in that row, the computer will
+                        toss a virtual coin or grant you the certain payment. If you chose the left column and the
+                        computer tosses a virtual coin, you'll receive 50 points with a probability of 50%.
+                        If you chose the certain payment in that row, you'll earn the corresponding amount presented
+                        in that particular row.
+                    </p>
+                    <p class="mb-2">
+                        You'll learn how much you earned in this task at the end of the experiment.
+                    </p>
+
+                </div>
+                <div class="d-flex justify-content-center modal-footer border-top-0">
+                    <button type="button" id="modal_button" class="btn btn-outline-light" data-bs-dismiss="modal" disabled>Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Risk Card -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-10 col-lg-8">
+
+
+                <div class="card mt-5">
+                    <div class="card-body">
+
+                        <p class="mb-3">
+                            <small>
+                                In this task, you make a decision that directly affects your earnings.
+                                In contrast to the previous task, this task depends on your choice and chance,
+                                but not on other participants' decisions.
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#666666" class="bi bi-book-fill" viewBox="0 0 16 16"
+                                data-toggle="modal" data-target="#instructionsModal" id="instructions_text">
+                                    <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                                </svg> Symbol oben rechts öffnen.
+                            </small>
+
+                        </p>
+
+
+                        <hr>
+                        <p class="text-center lead my-3">
+                            Do you prefer the coin toss (left) or the certain payment (right)?
+                        </p>
+
+                        <table class="table table-responsive" style="width: 100%;">
+                            <colgroup>
+                                <col span="1" style="width: 35%;">
+                                <col span="1" style="width: 30%;">
+                                <col span="1" style="width: 35%;">
+                            </colgroup>
+                            <thead>
+                                <tr class="header">
+
+                                    <th class="text-center">Probabilistic payment</th>
+                                    <th class="formfield"></th>
+                                    <th class="text-left">Certain payment</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {{ for i,f,p in choices }}
+                                    <tr>
+                                        {{ if i == 1 }}
+                                        <td class="lottery-a" rowspan="{{ Constants.num_choices }}" style="text-align: center; vertical-align: middle;">
+                                            <p style=" transform: rotate(-0deg)">
+                                                You'll earn<br>
+                                                50 tokens with a probability of 50%
+                                                <br> or <br>
+                                                nothing with a probability of 50%.
+                                            </p>
+                                        </td>
+                                        {{ endif }}
+
+                                        <!-- radio select form fields -->
+                                        <td class="formfield">
+                                            <input type="radio" name="{{ f }}" value="lottery" style="border-right: 2px solid #666666;" required>
+                                            &nbsp; &nbsp;
+                                            <input type="radio" name="{{ f }}" value="certainty" required>
+                                        </td>
+
+                                        <!-- B lotteries -->
+                                        <td class="lottery-b">
+                                            {{ p }} tokens
+                                        </td>
+                                    </tr>
+                                {{ endfor }}
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <div class="d-flex justify-content-center my-4">
+                        {{ next_button }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+{{ endblock }}

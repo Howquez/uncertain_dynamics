@@ -1,0 +1,355 @@
+{{ block scripts }}
+<script src="{{ static 'global/js/basics.js' }}"></script>
+<script src="{{ static 'global/js/toasts.js' }}"></script>
+<script src="{{ static 'global/js/decision.js' }}"></script>
+<script src="{{ static 'global/js/calculator.js' }}"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="{% static 'global/js/damage_viz.js' %}"></script>
+<script src="{% static 'global/js/mpcr_viz.js' %}"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{{ if player.round_number > 1 }}
+<script src="{% static 'global/js/miniature_time_series.js' %}"></script>
+{{ else }}
+<script src="{% static 'global/js/modal_with_timer.js' %}"></script>
+{{ endif }}
+{{ endblock }}
+
+{{ block global_styles  }}
+<style>
+    .otree-title {
+        display: none;
+        }
+</style>
+{{ endblock }}
+
+{{ block styles }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+{{ endblock }}
+
+
+{{ block content }}
+<body class="bg-light.bg-gradient">
+<img src="https://github.githubassets.com/images/modules/site/actions/hero-bg.jpg" id="bg" alt="" style="z-index: -1; position: fixed; left: 30; opacity: 0.90;">
+
+    <input type="hidden" name="calculator_time" id="calculator_time" value="0"/>
+
+    <!-- Header -->
+    <nav class="navbar navbar-inverse m-0 p-0 sticky-top mb-4 justify-content-between bg-white shadow-sm" style="z-index:1">
+        <h5>
+            <span class="badge rounded-pill mt-4 ms-3 bg-dark shadow" data-toggle="tooltip" data-placement="bottom" title="Round {{ player.round_number }}">
+                {{ if player.round_number == C.NUM_ROUNDS}} Last period {{ else }} Period {{ player.round_number }} {{ endif }}
+            </span>
+        </h5>
+
+        <h5>
+            <span class="badge rounded-pill mt-4 ms-3 bg-danger shadow" data-toggle="tooltip" data-placement="bottom" title="Risk of damage is {{ risk }}%">
+                Event probability: {{ risk }}%
+            </span>
+        </h5>
+
+        <div class="me-3" style="cursor: pointer;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calculator" viewBox="0 0 16 16" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCalculator" aria-controls="offcanvasCalculator" id="calculator_icon">
+                <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
+                <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-circle-fill ms-2" viewBox="0 0 16 16" data-bs-toggle="offcanvas" data-bs-target="#offcanvasInstructions" aria-controls="offcanvasInstructions" id="instructions_icon">
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+            </svg>
+        </div>
+    </nav>
+
+<!-- Modal: Risk Realization -->
+    {{ if player.round_number == 1 }}
+    <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="mt-3">
+                        The event probability is {{ risk }}%.
+                    </h4>
+                    <p class="text-secondary">
+                        This means that in each round, there is a {{ risk }}% chance that an event (potentially causing
+                        damage) occurs.
+                    </p>
+                    <p class="text-secondary">
+                        We print the probability in the red area at the top of your screen.
+                        If you have any further questions, please refer to the instructions by clicking at the
+                        <i class="bi bi-info-circle-fill"></i>-icon at the top right of your screen.
+                    </p>
+                </div>
+                <div class="d-flex justify-content-center modal-footer border-top-0">
+                    <button type="button" id="modal_button" class="btn btn-outline-light" data-bs-dismiss="modal" disabled>Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ endif }}
+
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-8 col-md-8 col-lg-6">
+
+                <!-- Info Cards -->
+                <div class="container p-0 mt-3">
+                    <div class="row">
+                        <!-- Personal Info -->
+                        <div class="col col-6">
+                            <div class="card shadow-sm h-100 bg-light rounded-0">
+                                <div class="card-body">
+                                    <p class="h5">
+                                        <small class="text-muted">Your current endowment:</small> {{ endowment }}
+                                    </p>
+                                    {{ if player.round_number > 1 }}
+                                    <h6 class="card-subtitle">
+                                        <span class="badge bg-secondary" data-bs-toggle="tooltip" data-bs-placement="right" title="Tokens you earned in the previous period">
+                                            {{ if diff > 0 }}+{{endif}}{{ diff }}
+                                        </span>
+                                    </h6>
+                                    {{ endif }}
+                                    {{ if player.round_number > 1 }}
+                                    <figure class="highcharts-figure mb-0">
+                                        <div id="container"></div>
+                                    </figure>
+                                    {{ endif }}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- MPCR -->
+                        <div class="col col-6">
+                            <div class="card shadow-sm h-100 rounded-0">
+                                <div class="card-body">
+                                    <small class="text-secondary">
+                                        You will receive
+                                    </small>
+                                    <p class="h5 m-2">
+                                        {{ mpcr }}
+                                    </p>
+                                    <small class="text-secondary">
+                                        ot the tokens you and the others allocated to the group account in this period.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Warning -->
+                {{ if ewe }}
+                <div class="alert alert-danger mt-3 rounded-0 shadow-sm" role="alert">
+                    <small>
+                        An event occured.
+                        {{ if total_damage > 0}}
+                        This caused a damage and diminished your returns.
+                        {{ endif }}
+                        Read <a href="#infoTable">here</a> for more information.
+                    </small>
+                </div>
+                {{ endif }}
+
+                <!-- Decision Card -->
+                <div class="card rounded mt-3 shadow-lg">
+                    <div class="card-body">
+
+                        <p class="h3">
+                            Your Decision
+                        </p>
+
+                        {{ if endowment > 0 }}
+                        <p class="card-text mb-1 text-secondary">
+                            From these {{ endowment }} tokens you can allocate any amount you want to the group account
+                            or keep everything (in your private account).
+                        </p>
+
+                        <p class="mb-4 text-secondary">
+                            <small>
+                                The tokens you keep, that is, the tokens you allocate to your private account,
+                                will remain unchanged until the next period.
+                            </small>
+                        </p>
+                        {{ else }}
+
+                        {{ endif }}
+                        <div class="container-fluid p-0 m-0">
+                            <div class="row align-items-center">
+                                <div class="col m-0">
+                                    <input type="number" class="form-control m-0 border-primary" placeholder="Allocation" id="id_contribution" name="contribution" min="0" required
+                                           data-container="body" data-toggle="popover" data-placement="bottom" data-content="You can allocate up to {{ endowment }} tokens to the group account in this period.">
+                                </div>
+                                <div class="col m-0">
+                                    <button type="submit" id="submit_button" class="btn-primary btn m-0 w-100" onclick="submitForm();">
+                                        To Group Account
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toast -->
+                <div class="toast text-dark bg-warning border-0 mt-3 w-100" role="alert" id="timeoutToast" aria-live="assertive" aria-atomic="true" data-bs-autohide="false" style="display:none">
+                    <div class="toast-body">
+                        <p>
+                            You only have 30 seconds left to make your decision.
+                        </p>
+                    </div>
+                </div>
+
+                {{ if player.round_number > 1 }}
+                <!-- Other's Earnings Card -->
+                <div class="card rounded bg-light mt-3">
+                    <div class="card-body"  id="infoTable">
+                        <p class="h3">
+                            Last Period's Allocations
+                        </p>
+                        <p class="mb-3 text-secondary">
+                            <small>
+                                The table displays the endowments of you and your group members at the beginning of the
+                                previous period (left) as well as the endowments at the beginning of the current period
+                                (right).
+                            </small>
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <td class="text-secondary"> </td>
+                                <td class="text-secondary">Previous endowment</td>
+                                <td class="text-secondary">Allocation to group account</td>
+                                <td class="text-secondary">Return</td>
+                                <td class="text-secondary">Damage</td>
+                                <td class="text-secondary">Current endowment</td>
+                                </thead>
+                                {{ for t in player.in_all_rounds }}
+                                {{ if t.round_number == previous_round }}
+                                <tr>
+                                    <td><small> <span class="badge bg-secondary">You</span> </small></td>
+                                    <td class="text-center text-secondary"><small> {{ t.endowment }} </small></td>
+                                    <td class="text-center text-secondary"><small> {{ t.contribution }} </small></td>
+                                    <td class="text-center text-secondary"><small> {{ t.returns }} </small></td>
+                                    <td class="text-center text-secondary"><small> {{ t.total_damage }} </small></td>
+                                    <td class="text-center text-secondary" data-toggle="tooltip" data-placement="top" title="={{ t.endowment }}-{{ t.contribution }}+{{ t.group.individual_share }}"><small> {{ t.stock }} </small></td>
+                                </tr>
+                                {{ for p in t.get_others_in_group }}
+                                <tr>
+                                    <td><small> <span class="badge bg-light text-dark"> #{{ p.id_in_group }}</span> </small></td>
+                                    <td class="text-center text-secondary"><small> {{ p.endowment }} </small></td>
+                                    <td class="text-center text-secondary"><small> {{ p.contribution }} </small></td>
+                                    <td class="text-center text-secondary"><small> {{ p.returns }} </small></td>
+                                    <td class="text-center text-secondary"><small> {{ p.total_damage }} </small></td>
+                                    <td class="text-center text-secondary" data-toggle="tooltip" data-placement="top" title="={{ p.endowment }}-{{ p.contribution }}+{{ p.group.individual_share }}"><small> {{ p.stock }} </small></td>
+                                </tr>
+                                {{ endfor }}
+                                {{ endif }}
+                                {{ endfor }}
+                            </table>
+                        </div>
+                        <p class="mt-3 text-secondary">
+                            <small>
+                                Your current endowment is the result of the following calculation:
+                            </small>
+                        </p>
+                        <p class="text-secondary">
+                            <small>
+                                Previous endowment<br>- Allocation to group account<br>+ Return<br>- Damage<br>= Current endowment
+                            </small>
+                        </p>
+                    </div>
+                </div>
+                {{ endif }}
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Calculator Offcanvas -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCalculator" aria-labelledby="offcanvasCalculatorLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasCalculatorLabel">Calculator</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div>
+                This calculator is designed to guide your decision. Given the quota of {{ mpcr }} as well as
+                your intended contribution, you can make an assumption about the other players' average contribution and
+                whether an event will occur to calculate your return.
+            </div>
+
+
+            <div class="form-check form-switch mt-4">
+                <input class="form-check-input" type="checkbox" role="switch" id="eweFlexSwitch">
+                <label class="form-check-label" for="eweFlexSwitch">Assume an event occurs?</label>
+            </div>
+            <div class="form-floating mt-2">
+                <input type="number" class="form-control" id="othersContributions" placeholder="0" value="0" min="0">
+                <label for="othersContributions">Other players' average allocation to the group account</label>
+            </div>
+            <div class="form-floating mt-2">
+                <input type="number" class="form-control" id="yourContribution" placeholder="0" value="0" min="0" max="{{endowment}}">
+                <label for="yourContribution">Your intended allocation to the group account</label>
+            </div>
+            <div class="form-floating mt-2">
+                <input type="number" class="form-control" id="yourReturn" placeholder="0" value="0" min="0" disabled>
+                <label for="yourReturn">Your expected return</label>
+            </div>
+            <button type="button" id="calculator_button" class="btn-primary btn mt-2 w-100" onclick="calculate();">
+                Calculate
+            </button>
+
+
+            <p class="h6 mt-5"> Further Details <small>given the quota of {{mpcr}}</small></p>
+            <div class="table-responsive mt-2">
+                <table class="table table-hover">
+                    <thead>
+                    </thead>
+                    <tr>
+                        <td> Your current endowment </td>
+                        <td> {{ endowment }} </td>
+                    </tr>
+                    <tr>
+                        <td> Others' average allocation to the group account</td>
+                        <td id="othersContributionsTable"> 0 </td>
+                    </tr>
+                    <tr>
+                        <td> Your intended allocation to the group account</td>
+                        <td id="yourContributionTable"> 0 </td>
+                    </tr>
+                    <tr>
+                        <td> Your expected return</td>
+                        <td id="yourReturnTable"> 0 </td>
+                    </tr>
+                    <thead>
+                    <td> Your expected endowment </td>
+                    <td id="yourEndowmentTable">{{ endowment }}</td>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instructions Offcanvas -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasInstructions" aria-labelledby="offcanvasInstructionsLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasInstructionsLabel">Instructions</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div>
+                {{ include C.EARNINGS_TEMPLATE }}
+            </div>
+
+            <h5 class="mt-5">
+                Shocks
+            </h5>
+            <hr class="mt-0">
+            <div>
+                {{ include C.SHOCKS_TEMPLATE }}
+            </div>
+        </div>
+    </div>
+
+</body>
+
+{{ endblock }}
+
+

@@ -1,0 +1,55 @@
+<input type="hidden" name="formula_shown" id="formula_shown" value="false"/>
+
+<p>
+    There is a fixed chance of {{ risk }}% that an event occurs. Such an event reduces your
+    endowment to up to {{ damage }}%. While you do not have any influence on the
+    occurence of an event, you can affect the damage it evokes:
+</p>
+
+<p>
+    The more you and the rest of your group contribute to the group account, the smaller the
+    damage if an event occurs. Conversely, the lower the contributions, the higher the damage if
+    an event occurs.
+</p>
+
+<p>
+    More precisely, there won't be any damage if everybody in the group contributes his or her
+    whole endowment to the group account &#8211 even if there was an event. If none of you
+    contributes anything to the group account, an event will cause a damage of {{ damage }}% of
+    the endowments of each and every one of you.
+</p>
+
+<p>
+    The following figure visualizes this relationship.
+</p>
+
+<div id="damage_viz"></div>
+
+<p>
+    Note that we provide a calculator behind the <i class="bi bi-calculator"></i>-symbol. It
+    takes the abovementioned formula, as well as the quota and helps you to consider different cases.
+    As such, it is most important that you understand that higher contributions lead to lower damage in case of an event.
+</p>
+
+<p>
+    This can also be explained by a formula.
+    <u class="text-primary" id="collapseButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFormula" aria-expanded="false" aria-controls="collapseFormula">
+        Click here
+    </u>
+    to learn more.
+</p>
+
+
+<div style="min-height: 120px;">
+    <p class="collapse" id="collapseFormula">
+        $$\text{Damage} = -{{damage}}\% \times \bigg(1-\frac{\text{Sum of contributions} }{ \text{Sum of endowments} } \bigg)$$
+    </p>
+</div>
+
+<script>
+    document.getElementById("collapseButton").addEventListener("click",
+        function() {
+            document.getElementById("formula_shown").value = true;
+        },
+    false);
+</script>
