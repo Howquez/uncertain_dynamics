@@ -16,7 +16,7 @@ class C(BaseConstants):
     NUM_ROUNDS = 10
     EARNINGS_TEMPLATE = "A_Intro/C_Earnings.html"
     SHOCKS_TEMPLATE = "A_Intro/D_Shocks.html"
-    PATIENCE = 1
+    PATIENCE = 7
     PATIENCE_BONUS = 20
     # INITIAL_ENDOWMENT = 20 called initial_endowment in session configs
     EFFICIENCY_FACTOR = 1.5
@@ -69,7 +69,6 @@ def creating_session(subsession):
 
 def waiting_too_long(player):
     participant = player.participant
-    import time
     # assumes you set wait_page_arrival in PARTICIPANT_FIELDS.
     return time.time() - participant.wait_page_arrival > C.PATIENCE*60
 
@@ -80,7 +79,6 @@ def group_by_arrival_time_method(subsession, waiting_players):
         player.wait_time_left = int(math.ceil(C.PATIENCE - (time.time() - player.participant.wait_page_arrival) / 60))
         if waiting_too_long(player):
             player.participant.waited_too_long = True
-            # make a single-player group.
             return [player]
 
 def contribution_max(player: Player):
@@ -170,7 +168,9 @@ class A_InitialWaitPage(WaitPage):
     @staticmethod
     def app_after_this_page(player, upcoming_apps):
         if player.participant.waited_too_long == True:
-            return upcoming_apps[0]
+            player.participant.vars["dPGG_payoff"] = C.PATIENCE_BONUS
+            player.participant.vars["mpl_payoff"] = 0
+            return upcoming_apps[-1]
 
 
 class B_Decision(Page):

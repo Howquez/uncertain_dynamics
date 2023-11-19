@@ -77,11 +77,27 @@ class Open_Text(Page):
 
     @staticmethod
     def is_displayed(player):
-        return player.participant.is_dropout == False
+        if player.participant.is_dropout == False:
+            if player.participant.waited_too_long == False:
+                return True
+            else:
+                return False
+        else:
+            return False
 
 class Covariates(Page):
     form_model = "player"
     form_fields = ['comprehension_1', 'comprehension_2']
+
+    @staticmethod
+    def is_displayed(player):
+        if player.participant.is_dropout == False:
+            if player.participant.waited_too_long == False:
+                return True
+            else:
+                return False
+        else:
+            return False
 
 class Demographics(Page):
     form_model = "player"
@@ -89,7 +105,14 @@ class Demographics(Page):
 
     @staticmethod
     def is_displayed(player):
-        return player.participant.is_dropout == False
+        if player.participant.is_dropout == False:
+            if player.participant.waited_too_long == False:
+                return True
+            else:
+                return False
+        else:
+            return False
+
 
     @staticmethod
     def before_next_page(player, timeout_happened):
