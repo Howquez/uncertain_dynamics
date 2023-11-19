@@ -11,17 +11,7 @@ SESSION_CONFIGS = [
         risk=0.2,
         damage=0.5,
         initial_endowment=20,
-    ),
-    dict(name='HLPL',
-         app_sequence=['C_HLPL'],
-         num_demo_participants=2,
-         num_rounds=1
-         ),
-    dict(name='ochat',
-         app_sequence=['oChat'],
-         num_demo_participants=2,
-         num_rounds=1
-         )
+    )
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
