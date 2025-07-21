@@ -108,10 +108,11 @@ def set_group_variables(group: Group):
         if group.wealth < 0:
             group.wealth = 0
 
-        # extreme weather events
-        a = random.randint(0, 100)
-        if a < group.damage_prob * 100:
+        # define extreme weather events (i.e. damage events)
+        if group.round_number == 3 or group.round_number == 8:
             group.EWE = True
+        if group.damage_prob == 0:
+            group.EWE = False
         group.damage_factor = 1 - (group.total_contribution / group.wealth)
 
 
