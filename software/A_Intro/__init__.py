@@ -1,7 +1,6 @@
 from otree.api import *
 import time
 
-
 doc = """
 Your app description
 """
@@ -51,21 +50,21 @@ class Player(BasePlayer):
                                choices=[
                                    [False, 'No matter what happens, I will receive an endowment of 20 tokens in each period'],
                                    [False, 'My earnings in the previous periods will not affect my endwoment of the current period.'],
-                                   [True, 'The higher my endowment (compared to others), the lower my quota, the lower my share from the group account.']
+                                   [True, 'The higher my endowment (compared to others), the lower my return rate from the group account.']
                                ])
 
-    CQ_4 = models.BooleanField(label='Which part of the following statement is false?',
+    CQ_4 = models.BooleanField(label='Which part of the following statement is FALSE?',
                                choices=[
-                                   [False, 'There a constant chance that an event occurs...'],
-                                   [False, '...If an event occurs, I may lose up to half of my endwoment...'],
-                                   [False, '...How much of my endowment will be lost, depends on my group...'],
-                                   [True, '...I, however, have no control over the damage if an event occurs.']
+                                   [False, 'There a constant chance that an event occurs.'],
+                                   [False, 'If an event occurs, I may lose up to half of my endwoment.'],
+                                   [False, 'How much of my endowment will be lost, depends on my group.'],
+                                   [True, 'I, however, have no control over the damage if an event occurs.']
                                ])
 
     CQ_5 = models.BooleanField(label='Take a closer look at your decision interface. How many tokens can you possibly allocate to the group account?',
                                choices=[
                                    [True, '20'],
-                                   [False, '46.67'],
+                                   [False, '46'],
                                    [False, '10']
                                ])
 

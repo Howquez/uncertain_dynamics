@@ -1,6 +1,7 @@
 {{ block scripts }}
 <script src="{% static 'global/js/buttons.js' %}"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {{ endblock }}
 
 {{ block global_styles  }}
@@ -44,7 +45,7 @@
                     <div class="card-body">
 
                         <h4 class="mt-3">
-                            Demo
+                            Decision Screen Demo
                         </h4>
 
                        {{ include C.DEMO_TEMPLATE }}
@@ -89,30 +90,30 @@
         </div>
 
     <!-- Calculator Offcanvas -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCalculator" aria-labelledby="offcanvasCalculatorLabel">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCalculator" aria-labelledby="offcanvasCalculatorLabel" style="min-width: 25vw;">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasCalculatorLabel">Calculator</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <div>
-                    This calculator is designed to guide your decision. Given a quota of {{ min_mpcr }}% as well as
-                    your intended contribution, you can make an assumption about the other players' average contribution and
+                    This calculator is designed to guide your decision. Given a return rate of approximately {{ min_mpcr }}% as well as
+                    your intended allocation, you can make an assumption about the other players' average allocation and
                     whether a shock will occur to calculate your return.
                 </div>
 
 
                 <div class="form-check form-switch mt-4">
                     <input class="form-check-input" type="checkbox" role="switch" id="eweFlexSwitch">
-                    <label class="form-check-label" for="eweFlexSwitch">Assume a shock occurs?</label>
+                    <label class="form-check-label" for="eweFlexSwitch">Assume an event occurs?</label>
                 </div>
                 <div class="form-floating mt-2">
                     <input type="number" class="form-control" id="othersContributions" placeholder="0" value="0" min="0">
-                    <label for="othersContributions">Other players' average contribution</label>
+                    <label for="othersContributions">Other players' average allocation</label>
                 </div>
                 <div class="form-floating mt-2">
                     <input type="number" class="form-control" id="yourContribution" placeholder="0" value="0" min="0">
-                    <label for="yourContribution">Your intended contribution</label>
+                    <label for="yourContribution">Your intended allocation</label>
                 </div>
                 <div class="form-floating mt-2">
                     <input type="number" class="form-control" id="yourReturn" placeholder="0" value="0" min="0" disabled>
@@ -122,10 +123,10 @@
                     Calculate
                 </button>
                 <small class="text-danger">
-                    The calculator is disbaled in this instructions-stage. It will be enabled on the decision screen.
+                    The calculator is disabled in this instructions-stage. It will be enabled on the decision screen.
                 </small>
 
-                <p class="h6 mt-5"> Further Details <small>given the quota of {{min_mpcr}}%</small></p>
+                <p class="h6 mt-5"> Further details <small>given the return rate of approximately {{min_mpcr}}%</small></p>
                 <div class="table-responsive mt-2">
                     <table class="table table-hover">
                         <thead>
@@ -135,11 +136,11 @@
                             <td> {{ session.config.initial_endowment }} </td>
                         </tr>
                         <tr>
-                            <td> Others' average contribution</td>
+                            <td> Others' average allocation</td>
                             <td id="othersContributionsTable"> 0 </td>
                         </tr>
                         <tr>
-                            <td> Your intended contribution</td>
+                            <td> Your intended allocation</td>
                             <td id="yourContributionTable"> 0 </td>
                         </tr>
                         <tr>

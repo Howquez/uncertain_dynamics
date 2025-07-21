@@ -14,15 +14,15 @@ Highcharts.chart('damage_viz', {
 
     tooltip: {
         formatter: function () {
-            return 'If your group contributes <b>' + this.x +
-                '%</b> a damage would cause a loss of <b>' + this.y + '%</b> of your stock.';
+            return 'If your group allocates <b>' + this.x*10 +
+                '%</b> to the group account a damage would cause a loss of <b>' + this.y + '%</b> of your stock.';
         }
     },
 
     xAxis: {
         categories: [0,10,20,30,40,50,60,70,80,90,100],
         title: {
-        		text : "Share of Total Endowments Contributed"
+        		text : "Share of Total Endowments Allocated to Group Account"
         },
         labels: {
             format: '{value}%'

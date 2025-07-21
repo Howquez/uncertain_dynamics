@@ -1,18 +1,42 @@
 <p>
-    Your decision screen will look as follows: You will see your endwoment in the top left panel;
-    your quota is displayed in the top right panel; your actual decision is made in the central panel, where you have an
-    input field on the left as well as a button (that submits your decision) on the right.
+    Here's what your decision screen will look like during the study:
 </p>
 
+<b>
+    Top Section
+</b>
+<ul>
+    <li>A banner showing the event probability (20% in this example).
+    This probability is the same for all members of your group throughout all periods</li>
+    <li>The left panel shows your current endowment (20 tokens in this example)</li>
+    <li>The right panel shows your return rate (46% in this example).
+        This is the percentage of the group account you'll receive, regardless of how many tokens you personally contributed.</li>
+</ul>
+
+<b>
+    Middle Section
+</b>
 <p>
-    In addition, there may be a red panel that shows up if an event occured. Finally, you will also see a panel informing you
-    about the other group members' decision (from round 2 on).
+    A red notification panel appears only if an event occurred at the end of the previous period (after you made your decision).
 </p>
+
+<b>
+    Bottom Section: Your Decision
+</b>
+<p>This is where you'll make your allocation decision.
+    The panel explains that from your current tokens (20 in this example), you can allocate any amount to the group account.
+    The tokens you do not transfer to the group account, will be allocated to your private account.
+    Any tokens in your private account will remain unchanged until the next period.
+    You'll enter the amount you intend to allocate to the group account in the input field on the left, then click the blue "To Group Account" button to confirm your decision.</p>
 
 
 <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-10 col-lg-10">
+
+                <div class="alert mt-3 rounded-0 shadow-sm text-center" role="alert">
+                    Event probability: 20%
+                </div>
 
                 <!-- Info Cards -->
                 <div class="container p-0 mt-3">
@@ -33,13 +57,13 @@
                             <div class="card shadow-sm h-100 rounded-0">
                                 <div class="card-body">
                                     <small class="text-secondary">
-                                        You will receive
+                                        You as well as each of your group members will receive approximately
                                     </small>
                                     <p class="h5 m-2">
-                                        46.67%
+                                        46%
                                     </p>
                                     <small class="text-secondary">
-                                        of the tokens allocated to the group account in this period.
+                                        of <u>all</u> tokens allocated to the group account in this period.
                                     </small>
                                 </div>
                             </div>
@@ -87,8 +111,10 @@
                                     </button>
                                 </div>
                             </div>
-
                         </div>
+                        <small class="text-danger">
+                            The button is disabled in this instructions-stage. It will be enabled on the decision screen.
+                        </small>
                     </div>
                 </div>
             </div>

@@ -34,7 +34,7 @@ class Player(BasePlayer):
 
     comprehension_2 = models.IntegerField(
         doc="Overall, I understood the rules of the first second well.",
-        label="Overall, I understood the rules of the first task well.",
+        label="Overall, I understood the rules of the second task well.",
         widget=widgets.RadioSelect,
         choices=[1, 2, 3, 4, 5, 6, 7])
 
@@ -56,7 +56,7 @@ class Player(BasePlayer):
 
     # OTF
     OTF = models.LongStringField(
-        label="Did you encounter any difficulties answering the study or do you have any comments?", blank=False)
+        label="Did you encounter any difficulties answering the study or do you have any comments?", blank=True)
 
     # gen AI
     genAI = models.StringField(

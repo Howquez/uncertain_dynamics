@@ -14,8 +14,8 @@ Highcharts.chart('mpcr_viz', {
 
     tooltip: {
         formatter: function () {
-            return 'If you have <b>' + this.x +
-                "%</b> of the group's endowments your quota equals <b>" + this.y + '%</b>';
+            return 'If you have <b>' + this.x*10 +
+                "%</b> of the group's endowments your return rate equals <b>" + this.y + '%</b>';
         }
     },
 
@@ -31,7 +31,7 @@ Highcharts.chart('mpcr_viz', {
 
     yAxis: {
         title: {
-        		text : "Your Quota"
+        		text : "Your Return Rate"
         },
         labels: {
             format: '{value}%'
@@ -60,6 +60,6 @@ Highcharts.chart('mpcr_viz', {
 
     series: [{
         name: 'Your Quota',
-        data: [50,49,48,47,46,45,44,43,42,41,40]
+        data: [37.5,36.5,35.5,34.5,33.5,32.5,31.5,30.5,29.5,28.5,27.5]
     }]
 });

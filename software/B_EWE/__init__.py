@@ -2,6 +2,7 @@ from otree.api import *
 import math
 import time
 import random
+from itertools import cycle
 
 
 
@@ -12,7 +13,7 @@ Your app description
 # MODELS
 class C(BaseConstants):
     NAME_IN_URL = 'EWE'
-    PLAYERS_PER_GROUP = 2
+    PLAYERS_PER_GROUP = 4
     NUM_ROUNDS = 10
     EARNINGS_TEMPLATE = "A_Intro/C_Earnings.html"
     SHOCKS_TEMPLATE = "A_Intro/D_Shocks.html"
@@ -21,8 +22,6 @@ class C(BaseConstants):
     # INITIAL_ENDOWMENT = 20 called initial_endowment in session configs
     EFFICIENCY_FACTOR = 1.5
     TIMEOUT = 4
-    # extreme weather constants
-    # DANGER = 0.2 called risk in session configs
     DAMAGE = 0.5
 
 
@@ -37,6 +36,7 @@ class Group(BaseGroup):
     individual_share = models.IntegerField(doc="individual share each player receives from this round's contributions")
     wealth = models.IntegerField(doc="sum of endowments at the beginning of a round")
     # extreme weather variables
+    damage_prob = models.FloatField(doc="describes the probability with which an even occurs.")
     EWE = models.BooleanField(initial=False, doc="if true, extreme weather event occurred")
     damage_factor = models.FloatField(doc="how much of an individual's income will be destroyed by an EWE")
     bot_active_in_next_round = models.BooleanField(initial=False, doc="indicates whether a bot is active due to another group member's timeout.")
@@ -52,8 +52,6 @@ class Player(BasePlayer):
     total_damage = models.IntegerField(initial=0, doc="damage caused by the ewe")
     MPCR = models.FloatField(doc="marginal per capita return")
 
-    formula_shown = models.BooleanField(doc="True if participant wanted to see the formula that explains earnings.",
-                                        initial=False)
     calculator_time=models.FloatField(doc="Counts the cumulative number of seconds the calculator was opened.",
                                       initial=0)
     dropout=models.BooleanField(doc="Documents whether a participant dropped out (e.g. due to a timeout).", initial=False)
@@ -63,7 +61,6 @@ class Player(BasePlayer):
 
 # FUNCTIONS
 def creating_session(subsession):
-    # read data (from seesion config)
     for player in subsession.get_players():
         player.participant.is_dropout = False
 
@@ -89,6 +86,9 @@ def contribution_max(player: Player):
 
 def set_group_variables(group: Group):
     if len(group.get_players()) == C.PLAYERS_PER_GROUP:
+        for player in group.get_players():
+            player.group.damage_prob = player.participant.damage_prob
+
         group.total_contribution = sum([p.contribution for p in group.get_players()])
         group.average_contribution = round(
             group.total_contribution / C.PLAYERS_PER_GROUP, 2
@@ -110,7 +110,7 @@ def set_group_variables(group: Group):
 
         # extreme weather events
         a = random.randint(0, 100)
-        if a < group.session.config["risk"] * 100:
+        if a < group.damage_prob * 100:
             group.EWE = True
         group.damage_factor = 1 - (group.total_contribution / group.wealth)
 
@@ -135,7 +135,7 @@ def set_payoffs(group: Group):
     for p in group.get_players(): # calculate player-level-variables
 
         # prepare for bad weather
-        p.MPCR = round(p.session.config["efficiency_factor"] / C.PLAYERS_PER_GROUP - p.session.config["damage"] * p.session.config["risk"] * p.endowment / p.group.wealth, 2)
+        p.MPCR = round(p.session.config["efficiency_factor"] / C.PLAYERS_PER_GROUP - (p.session.config["damage"] * p.group.damage_prob * p.endowment) / p.group.wealth, 3)
         p.returns = math.ceil(p.MPCR * p.group.total_contribution)
         p.stock = math.ceil(p.endowment - p.contribution + p.returns)
         if p.group.EWE:
@@ -167,15 +167,41 @@ class A_InitialWaitPage(WaitPage):
 
     @staticmethod
     def app_after_this_page(player, upcoming_apps):
+        probs = [0, player.session.config["risk"]]
+        selected_prob = probs[player.group.id_in_subsession % 2]
+        player.participant.damage_prob = selected_prob
+        player.group.damage_prob = selected_prob
+
         if player.participant.waited_too_long == True:
             player.participant.vars["dPGG_payoff"] = C.PATIENCE_BONUS
             player.participant.vars["mpl_payoff"] = 0
             return upcoming_apps[-1]
 
+class A_InitialPage(Page):
+    form_model = "player"
+
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == 1
+
+    @staticmethod
+    def get_timeout_seconds(player):
+        if player.participant.is_dropout:
+            return 1  # instant timeout, 1 second
+        else:
+            return 120
+
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        if timeout_happened:
+            player.dropout = True
+            player.participant.is_dropout = True
+            player.group.bot_active_in_next_round = True
+
 
 class B_Decision(Page):
     form_model = "player"
-    form_fields = ["contribution", "formula_shown", "calculator_time"]
+    form_fields = ["contribution", "calculator_time"]
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -199,13 +225,11 @@ class B_Decision(Page):
             bot_active=bot_active,
             previous_round=player.round_number - 1,
             ewe=ewe,
-            mpcr= str(round(100*(player.session.config["efficiency_factor"] / C.PLAYERS_PER_GROUP - player.session.config["damage"] * player.session.config["risk"] * endowment / wealth), 2)) +  "%",
+            mpcr= str(int(round(100*(player.session.config["efficiency_factor"] / C.PLAYERS_PER_GROUP - player.session.config["damage"] * player.participant.damage_prob * endowment / wealth), 0))) +  "%",
             total_damage = total_damage,
             damage=int(player.session.config["damage"]*100),
-            risk=int(player.session.config["risk"]*100),
-            group_members=player.session.config["group_size"] - 1,
-            min_mpcr=round((player.session.config["efficiency_factor"]/player.session.config["group_size"] - player.session.config["risk"]*player.session.config["damage"])*100, 1),
-            max_mpcr=round((player.session.config["efficiency_factor"]/player.session.config["group_size"])*100, 1)
+            risk=int(player.participant.damage_prob*100),
+            group_members=player.session.config["group_size"] - 1
         )
 
     @staticmethod
@@ -230,7 +254,7 @@ class B_Decision(Page):
             num_players=C.PLAYERS_PER_GROUP,
             wealth=wealth,
             damage=player.session.config["damage"],
-            factor=round(player.session.config["efficiency_factor"] / C.PLAYERS_PER_GROUP - player.session.config["damage"] * player.session.config["risk"] * endowment / wealth, 2),
+            factor=round(player.session.config["efficiency_factor"] / C.PLAYERS_PER_GROUP - player.session.config["damage"] * player.participant.damage_prob * endowment / wealth, 2),
         )
 
     @staticmethod
@@ -258,6 +282,13 @@ class B_Decision(Page):
 
 
 class C_ResultsWaitPage(WaitPage):
+    @staticmethod
+    def get_timeout_seconds(player):
+        if player.participant.is_dropout:
+            return 1  # instant timeout, 1 second
+        else:
+            return player.session.config['timeout_seconds'][player.round_number - 1] + 60
+
     after_all_players_arrive = "set_payoffs"
 
 
@@ -280,6 +311,7 @@ class D_Results(Page):
 
 
 page_sequence = [A_InitialWaitPage,
+                 A_InitialPage,
                  B_Decision,
                  C_ResultsWaitPage,
                  D_Results]

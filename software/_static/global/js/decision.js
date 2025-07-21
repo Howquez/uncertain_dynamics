@@ -30,6 +30,7 @@ document.getElementById("id_contribution").addEventListener('input', () => {
 });
 
 // submit Form after validation
+/*
 function submitForm() {
     contribution = document.getElementById("id_contribution").value
     if (contribution == "") {
@@ -46,5 +47,7 @@ function submitForm() {
             document.forms[0].submit()
         }
 }
+*/
+
 
 

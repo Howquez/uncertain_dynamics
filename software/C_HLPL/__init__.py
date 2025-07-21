@@ -70,7 +70,7 @@ def set_payoffs(player: Player):
         else:
             player.payoff = 0
     else:
-        player.payoff = player.participant.vars["mpl_index_to_pay"] * 10
+        player.payoff = (player.participant.vars["mpl_index_to_pay"]-1) * 5
     player.participant.vars["mpl_payoff"] = cu(player.payoff).to_real_world_currency(player.session)
 
 

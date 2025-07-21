@@ -1,34 +1,37 @@
 <input type="hidden" name="formula_shown" id="formula_shown" value="false"/>
 
 <p>
-    There is a fixed chance of {{ risk }}% that an event occurs. Such an event reduces your
-    endowment to up to {{ damage }}%. While you do not have any influence on the
-    occurence of an event, you can affect the damage it evokes:
+    There is a fixed probability that an <i>"event"</i> occurs during the study.
+    Such an event reduces your endowment by up to {{ damage }}%.
+    You will see the exact probability on your decision screen.
+    <u>This probability is the same for all members of your group throughout all {{ session.config.num_rounds }} periods.</u>
 </p>
+<p>
+    While you cannot influence whether an event occurs, you can reduce the damage it causes:
+</p>
+<ul>
+    <li>The more you and your group allocate to the group account, the smaller the damage if an event occurs.</li>
+    <li>Conversely, the less you contribute to the group account, the greater the damage if an event occurs.</li>
+</ul>
+
+<h4 class=" mt-4">
+    How Damage Works
+</h4>
 
 <p>
-    The more you and the rest of your group contribute to the group account, the smaller the
-    damage if an event occurs. Conversely, the lower the contributions, the higher the damage if
-    an event occurs.
-</p>
-
-<p>
-    More precisely, there won't be any damage if everybody in the group contributes his or her
-    whole endowment to the group account &#8211 even if there was an event. If none of you
-    contributes anything to the group account, an event will cause a damage of {{ damage }}% of
-    the endowments of each and every one of you.
-</p>
-
-<p>
-    The following figure visualizes this relationship.
+    If everyone in your group allocates their entire endowment to the group account, there will be no damage even if an event occurs.
+    If no one allocates anything to the group account, an event will cause a 50% reduction in everyone's endowments.
+    The following graph shows this relationship: as group contributions increase (moving left to right), potential damage decreases.
 </p>
 
 <div id="damage_viz"></div>
 
+<p>Example: If your group allocates 60% to the group account, an event would cause a loss of only 20% of your endowment (if it occurs).</p>
+
+
 <p>
     Note that we provide a calculator behind the <i class="bi bi-calculator"></i>-symbol. It
-    takes the abovementioned formula, as well as the quota and helps you to consider different cases.
-    As such, it is most important that you understand that higher contributions lead to lower damage in case of an event.
+    takes the above-mentioned formula, as well as the return rate and helps you to consider different cases.
 </p>
 
 <p>

@@ -7,6 +7,11 @@
 <script src="{% static 'global/js/time_series.js' %}"></script>
 {{ endblock }}
 
+{{ block styles }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{{ endblock }}
+
 {{ block content }}
 <body class="bg-light.bg-gradient">
     <img src="https://github.githubassets.com/images/modules/site/actions/hero-bg.jpg" id="bg" alt="" style="z-index: -1; position: fixed; left: 30; opacity: 0.90;">
@@ -68,8 +73,8 @@
                                 </small></td>
                                 <td class="text-center text-secondary"><small>{{ p.endowment }}</small></td>
                                 <td class="text-center text-secondary"><small>{{ p.contribution }}</small></td>
-                                <td class="text-center text-secondary"><small>{{ p.group.individual_share }}</small></td>
-                                <td class="text-center text-secondary" data-toggle="tooltip" data-placement="top" title="={{ p.endowment }}-{{ p.contribution }}+{{ p.group.individual_share }}"><small> {{ p.stock }} </small></td>
+                                <td class="text-center text-secondary"><small>{{ p.returns }}</small></td>
+                                <td class="text-center text-secondary" data-toggle="tooltip" data-placement="top" title="={{ p.endowment }}-{{ p.contribution }}+{{ p.returns }}"><small> {{ p.stock }} </small></td>
                             </tr>
                             {% endfor %}
                             </tbody>

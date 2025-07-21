@@ -4,9 +4,9 @@ SESSION_CONFIGS = [
     dict(
         name="EWE",
         app_sequence=["A_Intro", "B_EWE", "C_HLPL", "D_Outro"],
-        num_demo_participants=2,
+        num_demo_participants=4,
         num_rounds=10,
-        group_size=2,
+        group_size=4,
         efficiency_factor=1.5,
         risk=0.2,
         damage=0.5,
@@ -27,6 +27,7 @@ SESSION_CONFIG_DEFAULTS = dict(
 )
 
 PARTICIPANT_FIELDS = ["wait_page_arrival",
+                      "damage_prob",
                       "is_dropout",
                       "waited_too_long",
                       "stock",

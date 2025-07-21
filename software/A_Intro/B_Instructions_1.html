@@ -1,7 +1,8 @@
 {{ block scripts }}
 <script src="{% static 'global/js/buttons.js' %}"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script src="{% static 'global/js/modal_with_timer.js' %}"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {{ endblock }}
 
 {{ block global_styles  }}
@@ -50,7 +51,7 @@
                     </p>
 
                     <p>
-                        If you want to read through the complete set of instructions at any point during the experiment,
+                        If you want to re-read the instructions at any later point during the study,
                         you can do so by clicking on the <i class="bi bi-info-circle-fill"></i> icon on top of your screen.
                     </p>
                     <p>
@@ -61,7 +62,7 @@
 
                 </div>
                 <div class="d-flex justify-content-center modal-footer border-top-0">
-                    <button type="button" id="modal_button" class="btn btn-outline-light" data-bs-dismiss="modal" disabled>Understood</button>
+                    <button type="button" id="modal_button" class="btn btn-outline-primary" data-bs-dismiss="modal">Understood</button>
                 </div>
             </div>
         </div>
@@ -80,24 +81,25 @@
                         </h4>
 
                         <p>
-                            You are about to participate in a decision-making experiment. If you follow the instructions
+                            You are about to participate in a decision-making study. If you follow the instructions
                             carefully, you can earn a considerable amount of money that depends on your decisions and the
-                            decisions of three other participants. Your earnings will be transferred as bonus payments.
+                            decisions of three other participants.
+                            <u>Your earnings will be transferred as bonus payments.</u>
                         </p>
 
                         <p>
-                            Throughout the experiment you will make decisions about amounts of tokens. At the end of the
-                            experiment all tokens you have will be converted into Euros at the exchange rate
-                            €{{ session.config.real_world_currency_per_point }} for 1 point in addition to a
+                            Throughout the study you will make decisions about amounts of tokens. At the end of the
+                            study all tokens you have will be converted into British pound sterling at the <u>exchange rate
+                            £{{ session.config.real_world_currency_per_point }} for 1 point</u> in addition to a
                             show-up fee of {{ session.config.participation_fee }}.
                         </p>
 
                         <p>
-                            The experiment will consist of {{ session.config.num_rounds }} decision making periods
+                            The study will consist of <u>{{ session.config.num_rounds }} decision making periods</u>
                             as well as a brief questionnaire.
-                            At the beginning of the experiment, you will be matched with three other participants.
+                            At the beginning of the study, you will be matched with three other participants.
                             Therefore, there are four people, including yourself, participating in your group.
-                            You will be matched with the same participants during the entire experiment.
+                            <u>You will be matched with the same three participants during the entire study.</u>
                             None of the participants knows anything about other participants' identities.
                         </p>
 
@@ -105,7 +107,7 @@
                             We value your time and don't want you to wait too long for other group members to make their
                             decisions. For this reason, we restrict the time each participant has to make his or her
                             decision to five minutes in the first period and two and a half minutes in the subsequent periods.
-                            If a participant exceeds that time limit, he or she drops out of the experiment and is
+                            If a participant exceeds that time limit, he or she drops out of the study and is
                             replaced by a bot to ensure a smooth experience for all other group members.
                             You will be notified if that happens.
                         </p>
@@ -120,7 +122,7 @@
 
                         <p>
                             Before the first period, each participant will be given an
-                            <b>initial endowment of {{ session.config.initial_endowment }} tokens</b>.
+                            <u>initial endowment of {{ session.config.initial_endowment }} tokens</u>.
                         </p>
 
                         <hr class="">
@@ -181,30 +183,30 @@
         </div>
 
     <!-- Calculator Offcanvas -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCalculator" aria-labelledby="offcanvasCalculatorLabel">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCalculator" aria-labelledby="offcanvasCalculatorLabel" style="min-width: 25vw;">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasCalculatorLabel">Calculator</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <div>
-                    This calculator is designed to guide your decision. Given a quota of {{ min_mpcr }}% as well as
-                    your intended contribution, you can make an assumption about the other players' average contribution and
+                    This calculator is designed to guide your decision. Given a return rate of approximately {{ min_mpcr }}% as well as
+                    your intended allocation, you can make an assumption about the other players' average allocation and
                     whether a shock will occur to calculate your return.
                 </div>
 
 
                 <div class="form-check form-switch mt-4">
                     <input class="form-check-input" type="checkbox" role="switch" id="eweFlexSwitch">
-                    <label class="form-check-label" for="eweFlexSwitch">Assume a shock occurs?</label>
+                    <label class="form-check-label" for="eweFlexSwitch">Assume an event occurs?</label>
                 </div>
                 <div class="form-floating mt-2">
                     <input type="number" class="form-control" id="othersContributions" placeholder="0" value="0" min="0">
-                    <label for="othersContributions">Other players' average contribution</label>
+                    <label for="othersContributions">Other players' average allocation</label>
                 </div>
                 <div class="form-floating mt-2">
                     <input type="number" class="form-control" id="yourContribution" placeholder="0" value="0" min="0">
-                    <label for="yourContribution">Your intended contribution</label>
+                    <label for="yourContribution">Your intended allocation</label>
                 </div>
                 <div class="form-floating mt-2">
                     <input type="number" class="form-control" id="yourReturn" placeholder="0" value="0" min="0" disabled>
@@ -214,10 +216,10 @@
                     Calculate
                 </button>
                 <small class="text-danger">
-                    The calculator is disbaled in this instructions-stage. It will be enabled on the decision screen.
+                    The calculator is disabled in this instructions-stage. It will be enabled on the decision screen.
                 </small>
 
-                <p class="h6 mt-5"> Further Details <small>given the quota of {{min_mpcr}}%</small></p>
+                <p class="h6 mt-5"> Further details <small>given the return rate of approximately {{min_mpcr}}%</small></p>
                 <div class="table-responsive mt-2">
                     <table class="table table-hover">
                         <thead>
@@ -227,11 +229,11 @@
                             <td> {{ session.config.initial_endowment }} </td>
                         </tr>
                         <tr>
-                            <td> Others' average contribution</td>
+                            <td> Others' average allocation</td>
                             <td id="othersContributionsTable"> 0 </td>
                         </tr>
                         <tr>
-                            <td> Your intended contribution</td>
+                            <td> Your intended allocation</td>
                             <td id="yourContributionTable"> 0 </td>
                         </tr>
                         <tr>
