@@ -1,23 +1,23 @@
 {{ block scripts }}
-<script src="{{ static 'global/js/basics.js' }}"></script>
-<script src="{{ static 'js/timer.js' }}"></script>
-<script src="{{ static 'global/js/decision.js' }}"></script>
-<script src="{{ static 'global/js/calculator.js' }}"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="{% static 'global/js/damage_viz.js' %}"></script>
-<script src="{% static 'global/js/mpcr_viz.js' %}"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-{{ if player.round_number > 1 }}
-<script src="{% static 'global/js/miniature_time_series.js' %}"></script>
-{{ else }}
-<script src="{% static 'global/js/modal_with_timer.js' %}"></script>
-{{ endif }}
+    <script src="{{ static 'global/js/basics.js' }}"></script>
+    <script src="{{ static 'js/timer.js' }}"></script>
+    <script src="{{ static 'global/js/decision.js' }}"></script>
+    <script src="{{ static 'global/js/calculator.js' }}"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="{% static 'global/js/damage_viz.js' %}"></script>
+    <script src="{% static 'global/js/mpcr_viz.js' %}"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    {{ if player.round_number > 1 }}
+    <script src="{% static 'global/js/miniature_time_series.js' %}"></script>
+    {{ else }}
+    <script src="{% static 'global/js/modal_with_timer.js' %}"></script>
+    {{ endif }}
 {{ endblock }}
 
 
 {{ block styles }}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
-<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 {{ endblock }}
 
 
@@ -112,7 +112,7 @@
                             <div class="card shadow-sm h-100 rounded-0"
                                  {{ if risk > 0}}
                                  data-bs-toggle="tooltip"
-                                 data-bs-title="Beachten Sie, dass die exakten Prozentsätze zwischen Ihnen und anderen Gruppenmitgliedern leicht abweichen können. Weitere Informationen finden Sie im Abschnitt 'Rendite' in den Instruktionen."
+                                 data-bs-title="Beachten Sie, dass die exakten Prozentsätze zwischen Ihnen und anderen Gruppenmitgliedern leicht abweichen können. Weitere Informationen finden Sie in den Instruktionen."
                                 {{ endif }} >
                                 <div class="card-body">
                                     <small class="text-secondary">
@@ -136,9 +136,9 @@
                     <small>
                         Ein Ereignis ist eingetreten.
                         {{ if total_damage > 0}}
-                        Dies verursachte einen Schaden und verringerte Ihre Renditen.
+                        Dies verursachte einen Schaden und verringerte Ihre Ausschüttung.
                         {{ else }}
-                        Es hat jedoch Ihre Renditen nicht beeinträchtigt.
+                        Es hat Ihre Ausschüttung jedoch nicht beeinträchtigt.
                         {{ endif }}
                         Lesen Sie <a href="#infoTable">hier</a> für weitere Informationen.
                     </small>
@@ -221,7 +221,7 @@
                                 <td class="text-secondary"> </td>
                                 <td class="text-secondary">Vorherige Ausstattung</td>
                                 <td class="text-secondary">Allokation zum Gruppenkonto</td>
-                                <td class="text-secondary">Rendite</td>
+                                <td class="text-secondary">Ausschüttung</td>
                                 <td class="text-secondary">Schaden</td>
                                 <td class="text-secondary">Aktuelle Ausstattung</td>
                                 </thead>
@@ -256,7 +256,7 @@
                         </p>
                         <p class="text-secondary">
                             <small>
-                                Vorherige Ausstattung<br>- Allokation zum Gruppenkonto<br>+ Rendite<br>- Schaden<br>= Aktuelle Ausstattung
+                                Vorherige Ausstattung<br>- Allokation zum Gruppenkonto<br>+ Ausschüttung<br>- Schaden<br>= Aktuelle Ausstattung
                             </small>
                         </p>
                     </div>
@@ -275,9 +275,9 @@
         </div>
         <div class="offcanvas-body">
             <div>
-                Dieser Rechner soll Sie bei Ihrer Entscheidung unterstützen. Gegeben die Rendite von etwa {{ mpcr }} sowie
-                Ihrer beabsichtigten Allokation können Sie eine Annahme über die durchschnittliche Allokation der anderen Spieler treffen und
-                ob ein Ereignis eintreten wird, um Ihre Rendite zu berechnen.
+                Dieser Rechner soll Sie bei Ihren Entscheidungen unterstützen. Wenn Sie einen Anteil von {{ mpcr }}% aller Punkte des Gruppenkontos ausgeschüttet bekommen,
+                dann können Sie Ihre beabsichtigte Allokation sowie eine Annahme über die durchschnittliche Allokation der anderen Spieler eingeben,
+                um Ihre erwartete Ausschüttung zu berechnen.
             </div>
 
 
@@ -286,23 +286,23 @@
                 <label class="form-check-label" for="eweFlexSwitch">Annehmen, dass ein Ereignis eintritt?</label>
             </div>
             <div class="form-floating mt-2">
-                <input type="number" class="form-control" id="othersContributions" placeholder="0" value="0" min="0">
-                <label for="othersContributions">Durchschnittliche Allokation der anderen Spieler zum Gruppenkonto (in Punkten)</label>
+                <input type="number" class="form-control" id="othersContributions" min="0">
+                <label for="othersContributions">Durchschnittliche Allokation der anderen Teilnehmer zum Gruppenkonto (in Punkten)</label>
             </div>
             <div class="form-floating mt-2">
-                <input type="number" class="form-control" id="yourContribution" placeholder="0" value="0" min="0" max="{{endowment}}">
+                <input type="number" class="form-control" id="yourContribution" min="0" max="{{endowment}}">
                 <label for="yourContribution">Ihre beabsichtigte Allokation zum Gruppenkonto (in Punkten)</label>
             </div>
             <div class="form-floating mt-2">
-                <input type="number" class="form-control" id="yourReturn" placeholder="0" value="0" min="0" disabled>
-                <label for="yourReturn">Ihre erwartete Rendite (in Punkten)</label>
+                <input type="number" class="form-control" id="yourReturn" min="0" disabled>
+                <label for="yourReturn">Ihr erwarteter Profit (in Punkten)</label>
             </div>
             <button type="button" id="calculator_button" class="btn-primary btn mt-2 w-100" onclick="calculate();">
                 Berechnen
             </button>
 
 
-            <p class="h6 mt-5"> Weitere Details <small>gegeben die Rendite von etwa {{mpcr}}</small></p>
+            <p class="h6 mt-5"> Weitere Details <small>gegeben die Ausschütungsrate von {{mpcr}}</small></p>
             <div class="table-responsive mt-2">
                 <table class="table table-hover">
                     <thead>
@@ -320,11 +320,11 @@
                         <td id="yourContributionTable"> 0 </td>
                     </tr>
                     <tr>
-                        <td> Ihre erwartete Rendite (in Punkten)</td>
+                        <td> Ihr erwarteter Profit (in Punkten)</td>
                         <td id="yourReturnTable"> 0 </td>
                     </tr>
                     <thead>
-                    <td> Ihre erwartete Ausstattung (in Punkten)</td>
+                    <td> Ihre Ausschüttung (in Punkten)</td>
                     <td id="yourEndowmentTable">{{ endowment }}</td>
                     </thead>
                 </table>

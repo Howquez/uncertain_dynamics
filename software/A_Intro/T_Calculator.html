@@ -1,0 +1,65 @@
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCalculator" aria-labelledby="offcanvasCalculatorLabel" style="min-width: 25vw;">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasCalculatorLabel">Rechner</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div>
+            Dieser Rechner soll Sie bei Ihren Entscheidungen unterstützen. Wenn Sie einen Anteil von {{ min_mpcr }}% aller Punkte des Gruppenkontos ausgeschüttet bekommen,
+            dann können Sie Ihre beabsichtigte Allokation sowie eine Annahme über die durchschnittliche Allokation der anderen Spieler eingeben,
+            um Ihre erwartete Ausschüttung zu berechnen.
+        </div>
+
+
+        <div class="form-check form-switch mt-4">
+            <input class="form-check-input" type="checkbox" role="switch" id="eweFlexSwitch">
+            <label class="form-check-label" for="eweFlexSwitch">Annehmen, dass ein Ereignis eintritt?</label>
+        </div>
+        <div class="form-floating mt-2">
+            <input type="number" class="form-control" id="othersContributions" min="0">
+            <label for="othersContributions">Durchschnittliche Allokation der anderen Teilnehmer zum Gruppenkonto (in Punkten)</label>
+        </div>
+        <div class="form-floating mt-2">
+            <input type="number" class="form-control" id="yourContribution" min="0" max="20">
+            <label for="yourContribution">Ihre beabsichtigte Allokation zum Gruppenkonto (in Punkten)</label>
+        </div>
+        <div class="form-floating mt-2">
+            <input type="number" class="form-control" id="yourReturn" min="0" disabled>
+            <label for="yourReturn">Ihr erwarteter Profit (in Punkten)</label>
+        </div>
+        <button type="button" id="calculator_button" class="btn-primary btn mt-2 w-100" disabled>
+            Berechnen
+        </button>
+        <small class="text-danger">
+            Der Rechner ist in dieser Instruktionsphase deaktiviert. Er wird auf dem Entscheidungsbildschirm aktiviert.
+        </small>
+
+        <p class="h6 mt-5"> Weitere Details <small>gegeben einer Ausschütungsrate von {{min_mpcr}}%</small></p>
+        <div class="table-responsive mt-2">
+            <table class="table table-hover">
+                <thead>
+                </thead>
+                <tr>
+                    <td> Ihre aktuelle Ausstattung </td>
+                    <td> {{ session.config.initial_endowment }} </td>
+                </tr>
+                <tr>
+                    <td> Durchschnittliche Allokation der anderen zum Gruppenkonto (in Punkten)</td>
+                    <td id="othersContributionsTable"> 0 </td>
+                </tr>
+                <tr>
+                    <td> Ihre beabsichtigte Allokation zum Gruppenkonto (in Punkten)</td>
+                    <td id="yourContributionTable"> 0 </td>
+                </tr>
+                <tr>
+                    <td> Ihr erwarteter Profit (in Punkten)</td>
+                    <td id="yourReturnTable"> 0 </td>
+                </tr>
+                <thead>
+                <td> Ihre Ausschüttung (in Punkten) </td>
+                <td id="yourEndowmentTable">{{ session.config.initial_endowment }}</td>
+                </thead>
+            </table>
+        </div>
+    </div>
+  </div>

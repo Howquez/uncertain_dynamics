@@ -1,21 +1,14 @@
 {{ block scripts }}
-<script src="{% static 'global/js/buttons.js' %}"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="{% static 'global/js/mpcr_viz.js' %}"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-{{ endblock }}
-
-{{ block global_styles  }}
-<style>
-    .otree-title {
-        display: none;
-        }
-</style>
+    <script src="{% static 'global/js/buttons.js' %}"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="{% static 'global/js/mpcr_viz.js' %}"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {{ endblock }}
 
 {{ block styles }}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 {{ endblock }}
 
 
@@ -92,71 +85,7 @@
         </div>
 
     <!-- Calculator Offcanvas -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCalculator" aria-labelledby="offcanvasCalculatorLabel" style="min-width: 25vw;">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasCalculatorLabel">Rechner</h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <div>
-                    Dieser Rechner soll Sie bei Ihrer Entscheidung unterstützen. Gegeben eine Rendite von etwa {{ min_mpcr }}% sowie
-                    Ihrer beabsichtigten Allokation können Sie eine Annahme über die durchschnittliche Allokation der anderen Spieler treffen und
-                    ob ein Ereignis eintreten wird, um Ihre Rendite zu berechnen.
-                </div>
-
-
-                <div class="form-check form-switch mt-4">
-                    <input class="form-check-input" type="checkbox" role="switch" id="eweFlexSwitch">
-                    <label class="form-check-label" for="eweFlexSwitch">Annehmen, dass ein Ereignis eintritt?</label>
-                </div>
-                <div class="form-floating mt-2">
-                    <input type="number" class="form-control" id="othersContributions" placeholder="0" value="0" min="0">
-                    <label for="othersContributions">Durchschnittliche Allokation der anderen Spieler</label>
-                </div>
-                <div class="form-floating mt-2">
-                    <input type="number" class="form-control" id="yourContribution" placeholder="0" value="0" min="0">
-                    <label for="yourContribution">Ihre beabsichtigte Allokation</label>
-                </div>
-                <div class="form-floating mt-2">
-                    <input type="number" class="form-control" id="yourReturn" placeholder="0" value="0" min="0" disabled>
-                    <label for="yourContribution">Ihre erwartete Rendite</label>
-                </div>
-                <button type="button" id="calculator_button" class="btn-primary btn mt-2 w-100" disabled>
-                    Berechnen
-                </button>
-                <small class="text-danger">
-                    Der Rechner ist in dieser Instruktionsphase deaktiviert. Er wird auf dem Entscheidungsbildschirm aktiviert.
-                </small>
-
-                <p class="h6 mt-5"> Weitere Details <small>gegeben die Rendite von etwa {{min_mpcr}}%</small></p>
-                <div class="table-responsive mt-2">
-                    <table class="table table-hover">
-                        <thead>
-                        </thead>
-                        <tr>
-                            <td> Ihre aktuelle Ausstattung </td>
-                            <td> {{ session.config.initial_endowment }} </td>
-                        </tr>
-                        <tr>
-                            <td> Durchschnittliche Allokation der anderen</td>
-                            <td id="othersContributionsTable"> 0 </td>
-                        </tr>
-                        <tr>
-                            <td> Ihre beabsichtigte Allokation</td>
-                            <td id="yourContributionTable"> 0 </td>
-                        </tr>
-                        <tr>
-                            <td> Ihre erwartete Rendite</td>
-                            <td id="yourReturnTable"> 0 </td>
-                        </tr>
-                        <thead>
-                        <td> Ihre erwartete Ausstattung </td>
-                        <td id="yourEndowmentTable">{{ session.config.initial_endowment }}</td>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
+    {{ include C.CALCULATOR_TEMPLATE }}
 
 </body>
 

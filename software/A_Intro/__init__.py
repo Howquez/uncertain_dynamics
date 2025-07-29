@@ -14,6 +14,7 @@ class C(BaseConstants):
     SHOCKS_TEMPLATE = "A_Intro/D_Shocks.html"
     DEMO_TEMPLATE = "A_Intro/E_Demo.html"
     PRIVACY_TEMPLATE = "A_Intro/T_Privacy.html"
+    CALCULATOR_TEMPLATE = "A_Intro/T_Calculator.html"
 
 
 

@@ -1,8 +1,13 @@
 .otree-timer {
-        display: none;
-    }
-
+    display: none;
+}
 
 .otree-title {
-        display: none;
-        }
+    display: none;
+}
+
+/*
+.offcanvas {
+    width: min(480px, 90vw) !important;
+    min-width: 320px !important;
+}*/

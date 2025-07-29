@@ -14,15 +14,15 @@ Highcharts.chart('mpcr_viz', {
 
     tooltip: {
         formatter: function () {
-            return 'If you have <b>' + this.x*10 +
-                "%</b> of the group's endowments your return rate equals <b>" + this.y + '%</b>';
+            return 'Wenn Sie <b>' + this.x*10 +
+                "%</b> der gesamten Ausstattung der Gruppe besitzen, dann wird Ihnen am Ende der Periode ein prozentualer Anteil von <b>" + this.y + '%</b> aller Punkte im Gruppenkonto ausgeschüttet.';
         }
     },
 
     xAxis: {
         categories: [0,10,20,30,40,50,60,70,80,90,100],
         title: {
-        		text : "Share of Your Endowment compared to Total Endowments"
+        		text : "Ihr Anteil der gesamten Ausstattung der Gruppe"
         },
         labels: {
             format: '{value}%'
@@ -31,7 +31,7 @@ Highcharts.chart('mpcr_viz', {
 
     yAxis: {
         title: {
-        		text : "Your Return Rate"
+        		text : "Ausschüttungsrate aus dem Gruppenkonto"
         },
         labels: {
             format: '{value}%'
