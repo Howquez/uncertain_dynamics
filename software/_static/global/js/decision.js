@@ -22,9 +22,9 @@ document.getElementById("id_contribution").addEventListener('input', () => {
     input = parseInt(document.getElementById("id_contribution").value) || null;
     document.getElementById("submit_button").className = "btn-primary btn w-100"
     if (input > 0){
-        document.getElementById("submit_button").innerHTML = "To Group Account";
+        document.getElementById("submit_button").innerHTML = "Zum Gruppenkonto";
     } else {
-        document.getElementById("submit_button").innerHTML = "Keep everything";
+        document.getElementById("submit_button").innerHTML = "Alles behalten";
         // document.getElementById("id_contribution").value = null;
     }
 });
@@ -46,8 +46,4 @@ function submitForm() {
         if (investment <= current_endowment){
             document.forms[0].submit()
         }
-}
-*/
-
-
-
+} */

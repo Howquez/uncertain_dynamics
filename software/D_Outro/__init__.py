@@ -28,47 +28,46 @@ class Player(BasePlayer):
     # Covariates
     comprehension_1 = models.IntegerField(
         doc="Overall, I understood the rules of the first task well.",
-        label="Overall, I understood the rules of the first task well.",
+        label="Insgesamt habe ich die Regeln der ersten Aufgabe (d.h. der Allokationsstudie) gut verstanden.",
         widget=widgets.RadioSelect,
         choices=[1, 2, 3, 4, 5, 6, 7])
 
     comprehension_2 = models.IntegerField(
-        doc="Overall, I understood the rules of the first second well.",
-        label="Overall, I understood the rules of the second task well.",
+        doc="Overall, I understood the rules of the second task well.",
+        label="Insgesamt habe ich die Regeln der zweiten (risikobezogenen) Aufgabe gut verstanden.",
         widget=widgets.RadioSelect,
         choices=[1, 2, 3, 4, 5, 6, 7])
 
 
     # Demographics
-    age = models.IntegerField(label="Please enter your age",
+    age = models.IntegerField(label="Bitte geben Sie Ihr Alter ein",
                               min=18,
                               max=99)
 
     gender = models.IntegerField(
-        label="Please select your gender.",
+        label="Bitte wählen Sie Ihr Geschlecht aus.",
         choices=[
-            [1, "Female"],
-            [2, "Male"],
-            [3, "Other"],
-            [4, "Prefer not to say"],
+            [1, "Weiblich"],
+            [2, "Männlich"],
+            [3, "Andere"],
+            [4, "Möchte ich nicht angeben"],
         ]
     )
 
     # OTF
     OTF = models.LongStringField(
-        label="Did you encounter any difficulties answering the study or do you have any comments?", blank=True)
+        label="Haben Sie Anmerkungen oder hatten Sie Schwierigkeiten bei der Beantwortung der Studie?", blank=True)
 
     # gen AI
     genAI = models.StringField(
         doc="Did you use ChatGPT or any other generative AI to better understand the instructions? (Note: we will not reject your submission, if you did. We need the information to assess our overall data quality.)",
-        label="Did you  use ChatGPT or any other generative AI to better understand the instructions? (Note: we will not reject your submission, if you did. We need the information to assess our overall data quality.)",
+        label="Haben Sie ChatGPT oder eine andere generative KI verwendet, um die Instruktionen besser zu verstehen? (Hinweis: Wir werden Ihre Einreichung nicht ablehnen, falls Sie es getan haben. Wir benötigen diese Information, um unsere Datenqualität zu bewerten.)",
         widget=widgets.RadioSelect,
-        choices=["Yes", "No"],
+        choices=["Ja", "Nein"],
         blank=False)
 
     genAI_OTF = models.LongStringField(
-        label="If so, did it advise you on what to do? Did you follow the advice?", blank=True)
-
+        label="Falls ja, hat die KI Ihnen Empfehlungen gegeben, was Sie tun sollen? Sind Sie der Empfehlung gefolgt?", blank=True)
 
 # PAGES
 class Open_Text(Page):

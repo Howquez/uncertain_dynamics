@@ -23,7 +23,7 @@
     <!-- Header -->
     <nav class="navbar navbar-inverse sticky-top bg-white border-bottom justify-content-between" style="z-index:1">
         <h5 class="text-center">
-            Trade-offs
+            Entscheidungen
         </h5>
         <div class="me-2 text-secondary" style="cursor: pointer;">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="dark" class="bi bi-info-circle-fill ms-2" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#modal" aria-controls="modal" id="instructions_icon">
@@ -37,43 +37,43 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <h4 class="mt-3">
-                        Task
+                        Aufgabe
                     </h4>
 
                     <p class="mb-2">
-                        The underlying screen displays a table. In each row you have the choice between two alternatives
-                        (left. vs. right).
+                        Der darunterliegende Bildschirm zeigt eine Tabelle. In jeder Zeile haben Sie die Wahl zwischen zwei Alternativen
+                        (links vs. rechts).
 
-                        The left column shows you an 'all-or-nothing' (virtual) coin toss where you can earn 50 tokens
-                        with a probability of 50% (or nothing otherwise).
-                        The right column displays a variety of payments you can receive with certainty.
+                        Die linke Spalte zeigt Ihnen einen 'Alles-oder-Nichts' (virtuellen) Münzwurf, bei dem Sie 50 Punkte
+                        mit einer Wahrscheinlichkeit von 50% gewinnen können (oder andernfalls nichts).
+                        Die rechte Spalte zeigt verschiedene Zahlungen, die Sie mit Sicherheit erhalten können.
                     </p>
                     <p class="mb-2">
-                        To make your decision, you'll start in the first row to indicate which of the two alternatives you prefer.
-                        Afterward, you proceed with the second row, then with the third, and so on.
-                        The coin toss will always yield the same outcome while the certain payments in the right column
-                        increase from row to row.
+                        Um Ihre Entscheidung zu treffen, beginnen Sie in der ersten Zeile und geben an, welche der beiden Alternativen Sie bevorzugen.
+                        Danach fahren Sie mit der zweiten Zeile fort, dann mit der dritten und so weiter.
+                        Der Münzwurf wird immer zu entweder 50 oder 0 Punkten führen, während die sicheren Zahlungen in der rechten Spalte
+                        von Zeile zu Zeile steigen.
                     </p>
 
                     <h4 class="mt-3">
-                        Payment
+                        Vergütung
                     </h4>
 
                     <p class="mb-2">
-                        After you entered all your decisions, the computer randomly choose one of the rows.
-                        Depending on whether you prefered the left or right column in that row, the computer will
-                        toss a virtual coin or grant you the certain payment. If you chose the left column and the
-                        computer tosses a virtual coin, you'll receive 50 tokens with a probability of 50%.
-                        If you chose the certain payment in that row, you'll earn the corresponding amount presented
-                        in that particular row.
+                        Nachdem Sie alle Ihre Entscheidungen eingegeben haben, wählt der Computer zufällig eine der Zeilen aus.
+                        Je nachdem, ob Sie die linke oder rechte Spalte in dieser Zeile bevorzugt haben, wird der Computer
+                        eine virtuelle Münze werfen oder Ihnen die sichere Zahlung gewähren. Wenn Sie die linke Spalte gewählt haben und der
+                        Computer eine virtuelle Münze wirft, erhalten Sie 50 Punkte mit einer Wahrscheinlichkeit von 50%.
+                        Wenn Sie die sichere Zahlung in dieser Zeile gewählt haben, verdienen Sie den entsprechenden Betrag, der
+                        in dieser bestimmten Zeile angezeigt wird.
                     </p>
                     <p class="mb-2">
-                        You'll learn how much you earned in this task at the end of the experiment.
+                        Sie erfahren, wie viel Sie in dieser Aufgabe verdient haben, am Ende des Experiments.
                     </p>
 
                 </div>
                 <div class="d-flex justify-content-center modal-footer border-top-0">
-                    <button type="button" id="modal_button" class="btn btn-outline-light" data-bs-dismiss="modal" disabled>Understood</button>
+                    <button type="button" id="modal_button" class="btn btn-outline-light" data-bs-dismiss="modal" disabled>Verstanden</button>
                 </div>
             </div>
         </div>
@@ -91,15 +91,15 @@
 
                         <p class="mb-3">
                             <small>
-                                In this task, you make a decision that directly affects your earnings.
-                                In contrast to the previous task, this task depends on your choice and chance,
-                                but not on other participants' decisions.
+                                In dieser Aufgabe treffen Sie eine Entscheidung, die direkt Ihre Verdienste beeinflusst.
+                                Im Gegensatz zur vorherigen Aufgabe hängt diese Aufgabe von Ihrer Wahl und dem Zufall ab,
+                                aber nicht von den Entscheidungen anderer Teilnehmer.
                         </p>
 
 
                         <hr>
                         <p class="my-3">
-                            <b>Please indicate for each row, whether you prefer the coin toss (left) or the certain payment (right).</b>
+                            <b>Bitte geben Sie für jede Zeile an, ob Sie den Münzwurf (links) oder die sichere Zahlung (rechts) bevorzugen.</b>
                         </p>
 
                         <table class="table table-responsive" style="width: 100%;">
@@ -111,9 +111,9 @@
                             <thead>
                                 <tr class="header">
 
-                                    <th class="text-center">Coin toss payment</th>
+                                    <th class="text-center">Münzwurf-Zahlung</th>
                                     <th class="formfield"></th>
-                                    <th class="text-left">Certain payment</th>
+                                    <th class="text-left">Sichere Zahlung</th>
 
                                 </tr>
                             </thead>
@@ -124,10 +124,10 @@
                                         {{ if i == 1 }}
                                         <td class="lottery-a" rowspan="{{ Constants.num_choices }}" style="text-align: center; vertical-align: middle;">
                                             <p style=" transform: rotate(-0deg)">
-                                                You'll earn<br>
-                                                50 tokens with a probability of 50%
-                                                <br> or <br>
-                                                nothing with a probability of 50%.
+                                                Sie erhalten<br>
+                                                50 Punkte mit einer Wahrscheinlichkeit von 50%
+                                                <br> oder <br>
+                                                nichts mit einer Wahrscheinlichkeit von 50%.
                                             </p>
                                         </td>
                                         {{ endif }}
@@ -141,7 +141,7 @@
 
                                         <!-- B lotteries -->
                                         <td class="lottery-b">
-                                            {{ p }} tokens
+                                            {{ p }} Punkte
                                         </td>
                                     </tr>
                                 {{ endfor }}

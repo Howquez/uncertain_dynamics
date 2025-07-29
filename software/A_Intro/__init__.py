@@ -29,39 +29,40 @@ class Player(BasePlayer):
     formula_shown = models.BooleanField(doc="True if participant wanted to see the formula that explains earnings.",
                                         initial=False)
 
-    CQ_1 = models.BooleanField(label='How much money can you earn in this experiment?',
+    CQ_1 = models.BooleanField(label='Wie viel Geld können Sie in diesem Experiment verdienen?',
                                choices=[
-                                   [False, 'Exactly the fixed participation fee.'],
-                                   [True, 'That depends on my decisions and the decisions of others.'],
-                                   [False, '20 tokens.']
+                                   [False, 'Genau die feste Teilnahmegebühr.'],
+                                   [True, 'Das hängt von meinen Entscheidungen und den Entscheidungen anderer ab.'],
+                                   [False, '20 Punkte.']
                                ],
                                blank=False)
 
-    CQ_2 = models.BooleanField(label='Which of the following statements is correct?',
+    CQ_2 = models.BooleanField(label='Welche der folgenden Aussagen ist richtig?',
                                choices=[
-                                   [True, 'I will play ten periods while being matched with three other participants.'],
-                                   [False, 'I will be matched with ten participants and play four periods.'],
-                                   [False, 'I will play ten periods while being matched with four other participants'],
-                                   [False, 'None of the above is true.']
+                                   [True, 'Ich werde zehn Perioden spielen und dabei mit drei anderen Teilnehmern zusammengebracht.'],
+                                   [False, 'Ich werde mit zehn Teilnehmern zusammengebracht und vier Perioden spielen.'],
+                                   [False, 'Ich werde zehn Perioden spielen und dabei mit vier anderen Teilnehmern zusammengebracht.'],
+                                   [False, 'Keine der obigen Aussagen ist wahr.']
                                ],
                                blank=False)
 
-    CQ_3 = models.BooleanField(label='Which of the following statements is correct?',
+    CQ_3 = models.BooleanField(label='Welche der folgenden Aussagen ist richtig?',
                                choices=[
-                                   [False, 'No matter what happens, I will receive an endowment of 20 tokens in each period'],
-                                   [False, 'My earnings in the previous periods will not affect my endwoment of the current period.'],
-                                   [True, 'The higher my endowment (compared to others), the lower my return rate from the group account.']
+                                   [False, 'Egal was passiert, ich erhalte in jeder Periode eine Ausstattung von 20 Punkten.'],
+                                   [False, 'Meine Verdienste in den vorherigen Perioden werden meine Ausstattung der aktuellen Periode nicht beeinflussen.'],
+                                   [True, 'Je höher meine Ausstattung (im Vergleich zu anderen), desto niedriger meine Rendite aus dem Gruppenkonto.'],
+                                   [False, 'Ich erhalte eine Rendite auf genau die Anzahl der Punkte, die ich auf das Gruppenkonto ausgezahlt habe.']
                                ])
 
-    CQ_4 = models.BooleanField(label='Which part of the following statement is FALSE?',
+    CQ_4 = models.BooleanField(label='Welcher Teil der folgenden Aussage ist FALSCH?',
                                choices=[
-                                   [False, 'There a constant chance that an event occurs.'],
-                                   [False, 'If an event occurs, I may lose up to half of my endwoment.'],
-                                   [False, 'How much of my endowment will be lost, depends on my group.'],
-                                   [True, 'I, however, have no control over the damage if an event occurs.']
+                                   [False, 'Es gibt eine konstante Wahrscheinlichkeit, dass ein Ereignis eintritt.'],
+                                   [False, 'Wenn ein Ereignis eintritt, kann ich bis zur Hälfte meiner Ausstattung verlieren.'],
+                                   [False, 'Wie viel von meiner Ausstattung verloren geht, hängt von meiner Gruppe ab.'],
+                                   [True, 'Ich habe jedoch keinen Einfluss auf den Schaden, wenn ein Ereignis eintritt.']
                                ])
 
-    CQ_5 = models.BooleanField(label='Take a closer look at your decision interface. How many tokens can you possibly allocate to the group account?',
+    CQ_5 = models.BooleanField(label='Schauen Sie sich Ihre Entscheidungsoberfläche genauer an. Wie viele Punkte können Sie möglicherweise dem Gruppenkonto zuweisen?',
                                choices=[
                                    [True, '20'],
                                    [False, '46'],

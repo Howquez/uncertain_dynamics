@@ -7,8 +7,8 @@
     <!-- Decision Card -->
     <div class="card mt-5 shadow-lg">
         <div class="card-body">
-            <h1 class="display-4">Thank you!</h1>
-            <p class="lead">Your participation is greatly appreciated.</p>
+            <h1 class="display-4">Vielen Dank!</h1>
+            <p class="lead">Ihre Teilnahme wird sehr geschätzt.</p>
 
             <table class="table mt-5 mb-5 table-responsive">
                 <tbody>
@@ -21,68 +21,66 @@
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">Earnings</th>
+                        <th scope="row">Verdienst</th>
                         <td class="text-secondary">
                             {{ if participant.vars.is_dropout }}
                              <small>
-                                 Unfortunately, you dropped out of the experiment. For this reason, we were not able to
-                                 collect any data of you or your group members and cannot reimburse you.
+                                 Leider sind Sie aus dem Experiment ausgeschieden. Aus diesem Grund konnten wir keine Daten von Ihnen oder Ihren Gruppenmitgliedern erheben und können Sie nicht entschädigen.
                             </small>
                             {{ else }}
                                 {{ if participant.vars.waited_too_long }}
                                 <small>
-                                    Thanks for your patience. You will receive a fixed fee of {{ session.config.participation_fee }}
-                                    as well as the promised bonus for your patience.
+                                    Vielen Dank für Ihre Geduld. Sie erhalten eine feste Gebühr von {{ session.config.participation_fee }}
+                                    sowie den versprochenen Bonus für Ihre Geduld.
                                 </small>
                                 {{ else }}
                                  <small>
-                                    You will receive a fixed fee of {{ session.config.participation_fee }} for
-                                    your participation. In addition, you'll earn {{ participant.vars.dPGG_payoff }} as a
-                                    result of the group experiment as well as {{ participant.vars.mpl_payoff }} for the other task.
-                                    This results in a total payoff of {{ final_payoff }}.
+                                    Sie erhalten eine feste Gebühr von {{ session.config.participation_fee }} für
+                                    Ihre Teilnahme. Zusätzlich verdienen Sie {{ participant.vars.dPGG_payoff }} als
+                                    Ergebnis des Gruppenexperiments sowie {{ participant.vars.mpl_payoff }} für die andere Aufgabe.
+                                    Dies ergibt eine Gesamtauszahlung von {{ final_payoff }}.
                                 </small>
                                 {{ endif }}
                             {{ endif }}
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">Confidentiality</th>
+                        <th scope="row">Vertraulichkeit</th>
                         <td class="text-secondary">
                             <small>
-                                Please do not disclose research procedures to anyone who might participate in this study in
-                                the future as this could affect the results of the study.
+                                Bitte geben Sie die Forschungsverfahren nicht an Personen weiter, die möglicherweise in Zukunft an dieser Studie teilnehmen könnten, da dies die Ergebnisse der Studie beeinträchtigen könnte.
                             </small>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">Final Report</th>
+                        <th scope="row">Abschlussbericht</th>
                         <td class="text-secondary">
                             <small>
-                                If you would like to receive a copy of the final report of this study
-                                (or a summary of the findings) when it is completed, please feel free to contact us.
+                                Falls Sie eine Kopie des Abschlussberichts dieser Studie
+                                (oder eine Zusammenfassung der Ergebnisse) erhalten möchten, wenn diese abgeschlossen ist, kontaktieren Sie uns gerne.
                             </small>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">Contact Information</th>
+                        <th scope="row">Kontaktinformationen</th>
                         <td class="text-secondary">
                             <small>
-                                If you have any questions or concerns regarding this study, its purpose or procedures, or if
-                                you have a research-related problem, please feel free to contact the researcher,
-                                Mr. Hauke Roggenkamp, via eMail:
-                                <a href="mailto:hauke.roggenkamp@unisg.ch?subject=Social Preference Study: {{ participant.code }}">
+                                Falls Sie Fragen oder Bedenken bezüglich dieser Studie, ihres Zwecks oder ihrer Verfahren haben, oder wenn
+                                Sie ein forschungsbezogenes Problem haben, kontaktieren Sie gerne den Forscher,
+                                Herrn Hauke Roggenkamp, per E-Mail:
+                                <a href="mailto:hauke.roggenkamp@unisg.ch?subject=GMTV Extension Studie: {{ participant.code }}">
                                     hauke.roggenkamp@unisg.ch
                                 </a>.
-                                If you have questions or concerns regarding your data, please identify yourself with your
-                                unique ID: <code>{{ participant.code }}</code>
+                                Falls Sie Fragen oder Bedenken bezüglich Ihrer Daten haben, identifizieren Sie sich bitte mit Ihrer
+                                eindeutigen ID: <code>{{ participant.code }}</code>
                             </small>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <p class="text-center text-secondary mb-4">
-                <a class="btn btn-success shadow" href="" role="button">
-                    Click here to complete the survey
+                <a class="btn btn-success shadow" href="">
+                    Klicken Sie hier, um die Umfrage abzuschließen
                 </a>
             </p>
         </div>
@@ -90,4 +88,3 @@
 
 </body>
 {{ endblock }}
-

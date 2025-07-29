@@ -1,41 +1,41 @@
 <p>
-    Here's what your decision screen will look like during the study:
+    So wird Ihr Entscheidungsbildschirm während der Studie aussehen:
 </p>
 
 <b>
-    Top Section
+    Oberer Bereich
 </b>
 <ul>
-    <li>A banner showing the event probability (20% in this example).
-    This probability is the same for all members of your group throughout all periods</li>
-    <li>The left panel shows your current endowment (20 tokens in this example)</li>
-    <li>The right panel shows your return rate (46% in this example).
-        This is the percentage of the group account you'll receive, regardless of how many tokens you personally contributed.</li>
+    <li>Ein Banner, das die Ereigniswahrscheinlichkeit anzeigt (20% in diesem Beispiel).
+    Diese Wahrscheinlichkeit ist für alle Mitglieder Ihrer Gruppe während aller Perioden gleich.</li>
+    <li>Das linke Panel zeigt Ihre aktuelle Ausstattung (20 Punkte in diesem Beispiel).</li>
+    <li>Das rechte Panel zeigt Ihre Rendite (46% in diesem Beispiel).
+        Das ist der Prozentsatz des Gruppenkontos, den Sie erhalten, unabhängig davon, wie viele Punkte Sie persönlich beigetragen haben.</li>
 </ul>
 
 <b>
-    Middle Section
+    Mittlerer Bereich
 </b>
 <p>
-    A red notification panel appears only if an event occurred at the end of the previous period (after you made your decision).
+    Ein rotes Benachrichtigungsfeld erscheint nur dann, wenn ein Ereignis am Ende der vorherigen Periode eingetreten ist (nachdem Sie Ihre Entscheidung getroffen haben).
 </p>
 
 <b>
-    Bottom Section: Your Decision
+    Unterer Bereich: Ihre Entscheidung
 </b>
-<p>This is where you'll make your allocation decision.
-    The panel explains that from your current tokens (20 in this example), you can allocate any amount to the group account.
-    The tokens you do not transfer to the group account, will be allocated to your private account.
-    Any tokens in your private account will remain unchanged until the next period.
-    You'll enter the amount you intend to allocate to the group account in the input field on the left, then click the blue "To Group Account" button to confirm your decision.</p>
+<p>Hier treffen Sie Ihre Allokationsentscheidung.
+    Das Panel erklärt, dass Sie von Ihren aktuellen Punkten (20 in diesem Beispiel) einen beliebigen Betrag dem Gruppenkonto zuweisen können.
+    Die Punkte, die Sie nicht dem Gruppenkonto zuweisen, werden Ihrem privaten Konto zugeordnet.
+    Alle Punkte in Ihrem privaten Konto bleiben bis zur nächsten Periode unverändert.
+    Sie geben den Betrag, den Sie dem Gruppenkonto zuweisen möchten, in das Eingabefeld links ein und klicken dann auf den blauen Button "Zum Gruppenkonto", um Ihre Entscheidung zu bestätigen.</p>
 
 
 <div class="container">
         <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-10 col-lg-10">
+            <div class="col-sm-12 col-md-11 col-lg-10">
 
                 <div class="alert mt-3 rounded-0 shadow-sm text-center" role="alert">
-                    Event probability: 20%
+                    Ereigniswahrscheinlichkeit: 20%
                 </div>
 
                 <!-- Info Cards -->
@@ -46,7 +46,7 @@
                             <div class="card shadow-sm h-100 bg-light rounded-0">
                                 <div class="card-body">
                                     <p class="h5">
-                                        <small class="text-muted">Your current endowment:</small> 20
+                                        <small class="text-muted">Ihre aktuelle Ausstattung:</small> 20
                                     </p>
                                 </div>
                             </div>
@@ -57,13 +57,13 @@
                             <div class="card shadow-sm h-100 rounded-0">
                                 <div class="card-body">
                                     <small class="text-secondary">
-                                        You as well as each of your group members will receive approximately
+                                        Sie sowie jedes Ihrer Gruppenmitglieder erhalten etwa
                                     </small>
                                     <p class="h5 m-2">
                                         46%
                                     </p>
                                     <small class="text-secondary">
-                                        of <u>all</u> tokens allocated to the group account in this period.
+                                        <u>aller</u> Punkte, die dem Gruppenkonto in dieser Periode zugewiesen werden.
                                     </small>
                                 </div>
                             </div>
@@ -74,8 +74,8 @@
                 <!-- Warning -->
                 <div class="alert alert-danger mt-3 rounded-0 shadow-sm" role="alert">
                     <small>
-                        An event occured.
-                        This caused a damage and diminished your endowment.
+                        Ein Ereignis ist eingetreten.
+                        Dies verursachte einen Schaden und reduzierte Ihre Ausstattung.
                     </small>
                 </div>
 
@@ -84,36 +84,42 @@
                     <div class="card-body">
 
                         <p class="h3">
-                            Your Decision
+                            Ihre Entscheidung
                         </p>
 
                         <p class="card-text mb-1 text-secondary">
-                            From these 20 tokens you can allocate any amount you want to the group account or keep
-                            everything (in your private account).
+                            Von diesen 20 Punkten können Sie einen beliebigen Betrag dem Gruppenkonto zuweisen oder
+                            alles behalten (in Ihrem privaten Konto).
                         </p>
 
                         <p class="mb-4 text-secondary">
                             <small>
-                                The tokens you keep, that is, the tokens you allocate to your private account, will
-                                remain unchanged until the next period.
+                                Die Punkte, die Sie behalten, das heißt die Punkte, die Sie Ihrem privaten Konto zuweisen, bleiben
+                                bis zur nächsten Periode unverändert.
                             </small>
                         </p>
 
                         <div class="container-fluid p-0 m-0">
                             <div class="row align-items-center">
-                                <div class="col m-0">
-                                    <input type="number" class="form-control m-0 border-primary" placeholder="Allocation" id="id_contribution" name="contribution" min="0"
-                                           data-container="body" data-toggle="popover" data-placement="bottom" data-content="You can contribute up to 20 tokens in this period.">
+                                <div class="col-1 m-0 pe-0" data-bs-toggle="tooltip" data-bs-title="Klicken Sie auf den Rechner, um verschiedene Szenarien zu betrachten und zu berechnen." style="cursor: pointer;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calculator" viewBox="0 0 16 16" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCalculator" aria-controls="offcanvasCalculator" id="calculator_icon">
+                                        <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
+                                        <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z"/>
+                                    </svg>
                                 </div>
-                                <div class="col m-0">
+                                <div class="col-4 m-0">
+                                    <input type="number" class="form-control m-0 border-primary" placeholder="Allokation" id="id_contribution" name="contribution" min="0"
+                                           data-container="body" data-toggle="popover" data-placement="bottom" data-content="Sie können in dieser Periode bis zu 20 Punkte beitragen.">
+                                </div>
+                                <div class="col-7 m-0 ps-0">
                                     <button type="button" id="submit_button" class="btn-primary btn m-0 w-100" disabled>
-                                        To Group Account
+                                        Zum Gruppenkonto
                                     </button>
                                 </div>
                             </div>
                         </div>
                         <small class="text-danger">
-                            The button is disabled in this instructions-stage. It will be enabled on the decision screen.
+                            Der Button ist in dieser Instruktionsphase deaktiviert. Er wird auf dem Entscheidungsbildschirm aktiviert.
                         </small>
                     </div>
                 </div>
@@ -122,7 +128,7 @@
 </div>
 
 <p class="mt-5">
-    On top of that, you will see a header similar to the one you see right now. It will also show these icons
-    (<i class="bi bi-calculator"></i> and <i class="bi bi-info-circle-fill"></i>).
-    In addition, the header will tell you the period as well as the fixed probability of events.
+    Außerdem sehen Sie eine Kopfzeile ähnlich der, die Sie gerade sehen. Sie zeigt auch diese Symbole
+    (<i class="bi bi-calculator"></i> und <i class="bi bi-info-circle-fill"></i>).
+    Zusätzlich teilt Ihnen die Kopfzeile die Periode sowie die feste Wahrscheinlichkeit von Ereignissen mit.
 </p>

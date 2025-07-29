@@ -20,8 +20,8 @@ SESSION_CONFIGS = [
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=0.02,
-    participation_fee=2.00,
+    real_world_currency_per_point=0.04,
+    participation_fee=1.00,
     timeout_seconds = [300, 180, 150, 150, 150, 150, 150, 150, 150, 150],
     doc=""
 )
@@ -46,10 +46,10 @@ SESSION_FIELDS = ['prolific_completion_url']
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
-LANGUAGE_CODE = "en"
+LANGUAGE_CODE = "de"
 
 # e.g. EUR, GBP, CNY, JPY
-REAL_WORLD_CURRENCY_CODE = "GBP"
+REAL_WORLD_CURRENCY_CODE = "EUR"
 USE_POINTS = True
 
 ADMIN_USERNAME = 'admin'

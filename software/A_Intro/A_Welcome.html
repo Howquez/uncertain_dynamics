@@ -4,41 +4,39 @@
 <!-- Decision Card -->
 <div class="card mt-5 shadow-lg">
     <div class="card-body">
-        <h1 class="display-4">Welcome!</h1>
-        <p class="lead">Thank you for your interest in participating in this study.</p>
+        <h1 class="display-4">Willkommen!</h1>
+        <p class="lead">Vielen Dank für Ihr Interesse, an dieser Studie teilzunehmen.</p>
 
         <table class="table mt-5 mb-5 table-responsive">
             <tbody>
             <tr>
-                <th scope="row">Name of the study</th>
-                <td>Allocation Study</td>
+                <th scope="row">Name der Studie</th>
+                <td>Allokationsstudie</td>
             </tr>
             <tr>
-                <th scope="row">Duration</th>
+                <th scope="row">Dauer</th>
                 <td>
-                    Approximately 30 minutes.
+                    Ungefähr 30 Minuten.
                 </td>
             </tr>
             <tr>
-                <th scope="row">Earnings</th>
+                <th scope="row">Verdienst</th>
                 <td>
-                    {{ session.config.participation_fee }} as well as a variable bonus that depends on the decision of
-                    you and your group members.
+                    {{ session.config.participation_fee }} sowie einen variablen Bonus, der von Ihren Entscheidungen
+                    und den Entscheidungen Ihrer Gruppenmitglieder abhängt.
                 </td>
             </tr>
             <tr>
                 <th scope="row">
-                    Consent
+                    Einverständniserklärung
                 </th>
                 <td>
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="GDPR" required>
                         <label class="form-check-label" for="GDPR">
-                            I agree to the anonymized analysis of my answers for the purpose of the scientific
-                            evaluation according to the
-                            <a class="text-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasGDPR" id="gdpr_text" style="cursor: pointer;">
-                                <u>privacy policy</u>
-                            </a>.
+                            Ich stimme der anonymisierten Analyse meiner Antworten zum Zweck der wissenschaftlichen
+                            Auswertung gemäß der
+                            <a class="text-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasGDPR" id="gdpr_text" style="cursor: pointer;"><u>Datenschutzerklärung</u></a> zu.
                         </label>
                     </div>
                 </td>
@@ -47,7 +45,7 @@
         </table>
         <div class="d-flex justify-content-center m-5">
             <button class="btn btn-primary shadow" type="submit" id="submitButton">
-                Start
+                Starten
             </button>
         </div>
     </div>
@@ -56,7 +54,7 @@
 <!-- GDPR Offcanvas-->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasGDPR" aria-labelledby="offcanvasGDPRLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasGDPRLabel">Privacy Policy</h5>
+            <h5 class="offcanvas-title" id="offcanvasGDPRLabel">Datenschutzerklärung</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">

@@ -21,7 +21,7 @@
 // get categories, i.e. the rounds
 	var category = Array.from(seq(1, current_round));
 	for(var i=0;i<category.length;i++){
-		category[i]="Period #"+category[i];
+		category[i]="Periode #"+category[i];
 	}
 
 // create participation fee series
@@ -30,7 +30,7 @@
 
 // determine which series to be displayed
 	var series = endowments;
-	var suffix = " Points";
+	var suffix = " Punkte";
 	var plot_line_width = 1;
 	var show_in_legend = false;
 	var max = num_rounds;
@@ -134,7 +134,7 @@ var chart = Highcharts.chart('container', {
         },
     },
     series: [{
-        name: "Earnings",
+        name: "Endverdienst",
         data: series,
         showInLegend: false //show_in_legend
     },{

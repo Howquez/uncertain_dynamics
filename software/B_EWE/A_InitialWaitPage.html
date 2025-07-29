@@ -2,20 +2,20 @@
 
 {{ block content }}
     <p>
-        You answered all questions correctly.
+        Sie haben alle Fragen richtig beantwortet.
     </p>
     <p class="lead">
-        You are now going to be matched with other participants to form a group. This may take a few minutes.
+        Sie werden nun mit anderen Teilnehmern zusammengebracht, um eine Gruppe zu bilden. Dies kann einige Minuten dauern.
     </p>
     <p>
         <small>
-            {{ if player.wait_time_left > 1 %}
-            If this process takes more than {{ player.wait_time_left }} minutes
+            {{ if player.wait_time_left > 1 }}
+            Falls dieser Prozess länger als {{ player.wait_time_left }} Minuten dauert,
             {{ else }}
-            If this process takes more than another minute
+            Falls dieser Prozess länger als eine weitere Minute dauert,
             {{ endif }}
-            you will be directed to the end of the study. In that case we will reward you with a patience bonus of
-            {{ C.PATIENCE_BONUS }} tokens.
+            werden Sie zum Ende der Studie weitergeleitet. In diesem Fall belohnen wir Sie mit einem Geduldsbonus von
+            {{ C.PATIENCE_BONUS }} Punkten.
         </small>
     </p>
 {{ endblock }}

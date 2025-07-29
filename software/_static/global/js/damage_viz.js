@@ -14,15 +14,15 @@ Highcharts.chart('damage_viz', {
 
     tooltip: {
         formatter: function () {
-            return 'If your group allocates <b>' + this.x*10 +
-                '%</b> to the group account a damage would cause a loss of <b>' + this.y + '%</b> of your stock.';
+            return 'Wenn Ihre Gruppe <b>' + this.x*10 +
+                '%</b> der gesamten Ausstattung (über alle Gruppenmitglieder hinweg) dem Gruppenkonto zuweist, würde das im Schadensfall zu einem Verlust von <b>' + this.y + '%</b> Ihrer Ausstattung führen.';
         }
     },
 
     xAxis: {
         categories: [0,10,20,30,40,50,60,70,80,90,100],
         title: {
-        		text : "Share of Total Endowments Allocated to Group Account"
+        		text : "Anteil der gesamten Ausstattung (über alle Gruppenmitglieder hinweg) der dem Gruppenkonto zugewiesen wurde."
         },
         labels: {
             format: '{value}%'
@@ -31,7 +31,7 @@ Highcharts.chart('damage_viz', {
 
     yAxis: {
         title: {
-        		text : "Possible Damage of Stock in Percent"
+        		text : "Schaden als Anteil an Ihrer Ausstattung"
         },
         labels: {
             format: '{value}%'
@@ -59,7 +59,7 @@ Highcharts.chart('damage_viz', {
     },
 
     series: [{
-        name: 'Possible Damage',
-        data: [50,45,40,35,30,25,20,15,10,5,0]
+        name: 'Schaden',
+        data: [-50,-45,-40,-35,-30,-25,-20,-15,-10,-5,0]
     }]
 });

@@ -1,4 +1,3 @@
-
 {{ block scripts }}
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
@@ -19,8 +18,8 @@
     <!-- Header -->
     <nav class="navbar navbar-inverse m-0 p-0 sticky-top mb-4 justify-content-between bg-white shadow-sm" style="z-index:1">
         <h5>
-                <span class="badge rounded-pill mt-4 ms-3 bg-dark shadow" data-toggle="tooltip" data-placement="bottom" title="Period {{ player.round_number }}">
-                    Last period
+                <span class="badge rounded-pill mt-4 ms-3 bg-dark shadow" data-toggle="tooltip" data-placement="bottom" title="Periode {{ player.round_number }}">
+                    Letzte Periode
                 </span>
         </h5>
         <div class="me-3" style="cursor: pointer;">
@@ -36,11 +35,11 @@
                 <div class="card mt-3 shadow-lg">
                     <div class="card-body">
                         <p class="h3">
-                            Almost done
+                            Fast geschafft
                         </p>
                         <p class="text-secondary">
-                            You completed all {{ player.round_number }} periods. This page explains, how much you earned in
-                            each of them.
+                            Sie haben alle {{ player.round_number }} Perioden abgeschlossen. Diese Seite erklärt, wie viel Sie in
+                            jeder einzelnen verdient haben.
                         </p>
                     </div>
                 </div>
@@ -49,7 +48,7 @@
                 <div class="card mt-3 shadow-lg">
                     <div class="card-body">
                         <p class="h3">
-                            Your earnings over time
+                            Ihre Verdienste im Zeitverlauf
                         </p>
                         <figure class="highcharts-figure mb-1">
                             <div id="container"></div>
@@ -57,11 +56,11 @@
 
                         <table class="table table-hover table-responsive-md">
                             <thead>
-                            <td class="text-secondary">Period</td>
-                            <td class="text-secondary">Endowment</td>
-                            <td class="text-secondary">Contribution</td>
-                            <td class="text-secondary">Return</td>
-                            <td class="text-secondary">Stock</td>
+                            <td class="text-secondary">Periode</td>
+                            <td class="text-secondary">Ausstattung</td>
+                            <td class="text-secondary">Beitrag</td>
+                            <td class="text-secondary">Rendite</td>
+                            <td class="text-secondary">Endverdienst</td>
                             </thead>
                             <tbody>
                             {% for p in player.in_all_rounds %}
@@ -83,7 +82,7 @@
 
                     <div class="d-flex justify-content-center m-5">
                         <button class="btn btn-primary shadow" type="submit" id="submitButton">
-                            Next
+                            Weiter
                         </button>
                     </div>
 

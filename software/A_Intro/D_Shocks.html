@@ -1,51 +1,51 @@
 <input type="hidden" name="formula_shown" id="formula_shown" value="false"/>
 
 <p>
-    There is a fixed probability that an <i>"event"</i> occurs during the study.
-    Such an event reduces your endowment by up to {{ damage }}%.
-    You will see the exact probability on your decision screen.
-    <u>This probability is the same for all members of your group throughout all {{ session.config.num_rounds }} periods.</u>
+    Es gibt eine feste Wahrscheinlichkeit, dass während der Studie ein <i>"Ereignis"</i> eintritt.
+    Ein solches Ereignis reduziert Ihre Ausstattung um bis zu {{ damage }}%.
+    Sie sehen die genaue Wahrscheinlichkeit auf Ihrem Entscheidungsbildschirm.
+    <u>Diese Wahrscheinlichkeit ist für alle Mitglieder Ihrer Gruppe während aller {{ session.config.num_rounds }} Perioden gleich.</u>
 </p>
 <p>
-    While you cannot influence whether an event occurs, you can reduce the damage it causes:
+    Obwohl Sie nicht beeinflussen können, ob ein Ereignis eintritt, können Sie den Schaden, den es verursacht, reduzieren:
 </p>
 <ul>
-    <li>The more you and your group allocate to the group account, the smaller the damage if an event occurs.</li>
-    <li>Conversely, the less you contribute to the group account, the greater the damage if an event occurs.</li>
+    <li>Je mehr Sie und Ihre Gruppe dem Gruppenkonto zuweisen, desto geringer ist der Schaden, wenn ein Ereignis eintritt.</li>
+    <li>Umgekehrt gilt: Je weniger Sie zum Gruppenkonto beitragen, desto größer ist der Schaden, wenn ein Ereignis eintritt.</li>
 </ul>
 
 <h4 class=" mt-4">
-    How Damage Works
+    Wie Schäden funktionieren
 </h4>
 
 <p>
-    If everyone in your group allocates their entire endowment to the group account, there will be no damage even if an event occurs.
-    If no one allocates anything to the group account, an event will cause a 50% reduction in everyone's endowments.
-    The following graph shows this relationship: as group contributions increase (moving left to right), potential damage decreases.
+    Wenn alle in Ihrer Gruppe ihre gesamte Ausstattung dem Gruppenkonto zuweisen, entstehen keine Schäden, selbst wenn ein Ereignis eintritt.
+    Wenn niemand etwas dem Gruppenkonto zuweist, verursacht ein Ereignis eine 50%ige Reduzierung der Ausstattungen aller.
+    Die folgende Grafik zeigt diesen Zusammenhang: Wenn die Gruppenbeiträge steigen (von links nach rechts), nimmt der potenzielle Schaden ab.
 </p>
 
 <div id="damage_viz"></div>
 
-<p>Example: If your group allocates 60% to the group account, an event would cause a loss of only 20% of your endowment (if it occurs).</p>
+<p>Beispiel: Wenn Ihre Gruppe 60% dem Gruppenkonto zuweist, würde ein Ereignis nur einen Verlust von 20% Ihrer Ausstattung verursachen (falls es eintritt).</p>
 
 
 <p>
-    Note that we provide a calculator behind the <i class="bi bi-calculator"></i>-symbol. It
-    takes the above-mentioned formula, as well as the return rate and helps you to consider different cases.
+    Beachten Sie, dass wir einen Rechner hinter dem <i class="bi bi-calculator"></i>-Symbol bereitstellen. Er
+    verwendet die oben erwähnte Formel sowie die Rendite und hilft Ihnen dabei, verschiedene Fälle zu betrachten.
 </p>
 
 <p>
-    This can also be explained by a formula.
+    Dies kann auch durch eine Formel erklärt werden.
     <u class="text-primary" id="collapseButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFormula" aria-expanded="false" aria-controls="collapseFormula">
-        Click here
+        Klicken Sie hier
     </u>
-    to learn more.
+    um mehr zu erfahren.
 </p>
 
 
 <div style="min-height: 120px;">
     <p class="collapse" id="collapseFormula">
-        $$\text{Damage} = -{{damage}}\% \times \bigg(1-\frac{\text{Sum of contributions} }{ \text{Sum of endowments} } \bigg)$$
+        $$\text{Schaden} = -{{damage}}\% \times \bigg(1-\frac{\text{Summe der Beiträge} }{ \text{Summe der Ausstattungen} } \bigg)$$
     </p>
 </div>
 

@@ -24,7 +24,7 @@
     <!-- Header -->
     <nav class="navbar navbar-inverse sticky-top bg-white border-bottom justify-content-between" style="z-index:1">
         <h5 class="text-center">
-            Instructions
+            Instruktionen
         </h5>
         <div class="me-2 text-secondary" style="cursor: pointer;">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="dark" class="bi bi-calculator" viewBox="0 0 16 16" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCalculator" aria-controls="offcanvasCalculator" id="calculator_icon">
@@ -42,27 +42,27 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <h4 class="mt-3">
-                        Process
+                        Ablauf
                     </h4>
 
                     <p>
-                        The next few pages will guide you through the instructions.
-                        On each page, we'll ask at least one comprehension question.
+                        Die nächsten Seiten führen Sie durch die Instruktionen.
+                        Auf jeder Seite stellen wir Ihnen mindestens eine Verständnisfrage.
                     </p>
 
                     <p>
-                        If you want to re-read the instructions at any later point during the study,
-                        you can do so by clicking on the <i class="bi bi-info-circle-fill"></i> icon on top of your screen.
+                        Falls Sie die Instruktionen zu einem späteren Zeitpunkt während der Studie nochmals lesen möchten,
+                        können Sie dies tun, indem Sie auf das <i class="bi bi-info-circle-fill"></i> Symbol oben auf Ihrem Bildschirm klicken.
                     </p>
                     <p>
-                        Next to it, the <i class="bi bi-calculator"></i> icon helps you to consider different cases and to calculate
-                        the outcomes of different scenarios during the decision stage.
-                        We'll explain that in what follows.
+                        Daneben hilft Ihnen das <i class="bi bi-calculator"></i> Symbol dabei, verschiedene Fälle zu betrachten und
+                        die Ergebnisse verschiedener Szenarien während der Entscheidungsphase zu berechnen.
+                        Das werden wir im Folgenden erklären.
                     </p>
 
                 </div>
                 <div class="d-flex justify-content-center modal-footer border-top-0">
-                    <button type="button" id="modal_button" class="btn btn-outline-primary" data-bs-dismiss="modal">Understood</button>
+                    <button type="button" id="modal_button" class="btn btn-outline-primary" data-bs-dismiss="modal">Verstanden</button>
                 </div>
             </div>
         </div>
@@ -77,52 +77,48 @@
                     <div class="card-body">
 
                         <h4 class="mt-3">
-                            Overview
+                            Überblick
                         </h4>
 
                         <p>
-                            You are about to participate in a decision-making study. If you follow the instructions
-                            carefully, you can earn a considerable amount of money that depends on your decisions and the
-                            decisions of three other participants.
-                            <u>Your earnings will be transferred as bonus payments.</u>
+                            Sie sind dabei, an einer Entscheidungsstudie teilzunehmen. Wenn Sie die Instruktionen
+                            sorgfältig befolgen, können Sie einen beträchtlichen Geldbetrag verdienen, der von Ihren Entscheidungen und den
+                            Entscheidungen von drei anderen Teilnehmern abhängt.
                         </p>
 
                         <p>
-                            Throughout the study you will make decisions about amounts of tokens. At the end of the
-                            study all tokens you have will be converted into British pound sterling at the <u>exchange rate
-                            £{{ session.config.real_world_currency_per_point }} for 1 point</u> in addition to a
-                            show-up fee of {{ session.config.participation_fee }}.
+                            Während der gesamten Studie treffen Sie Entscheidungen um Punkte zu verdienen. Am Ende der
+                            Studie werden alle Punkte, die Sie haben zum <u>Wechselkurs von
+                            {{ session.config.real_world_currency_per_point }} € für 1 Punkt</u> umgerechnet und zusätzlich zu einer
+                            Teilnahmegebühr von {{ session.config.participation_fee }} ausgezahlt.
                         </p>
 
                         <p>
-                            The study will consist of <u>{{ session.config.num_rounds }} decision making periods</u>
-                            as well as a brief questionnaire.
-                            At the beginning of the study, you will be matched with three other participants.
-                            Therefore, there are four people, including yourself, participating in your group.
-                            <u>You will be matched with the same three participants during the entire study.</u>
-                            None of the participants knows anything about other participants' identities.
+                            Die Studie besteht aus <u>{{ session.config.num_rounds }} Entscheidungsrunden</u>
+                            sowie einem kurzen Fragebogen.
+                            Zu Beginn der Studie werden Sie mit drei anderen Teilnehmern zusammengebracht.
+                            Ihre Gruppe besteht also, mit Ihnen eingeschlossen, aus vier Personen.
+                            <u>Sie werden während der gesamten Studie mit denselben drei Teilnehmern zusammengebracht.</u>
                         </p>
 
                         <p>
-                            We value your time and don't want you to wait too long for other group members to make their
-                            decisions. For this reason, we restrict the time each participant has to make his or her
-                            decision to five minutes in the first period and two and a half minutes in the subsequent periods.
-                            If a participant exceeds that time limit, he or she drops out of the study and is
-                            replaced by a bot to ensure a smooth experience for all other group members.
-                            You will be notified if that happens.
+                            Wir schätzen Ihre Zeit und möchten nicht, dass Sie zu lange darauf warten müssen, dass andere Gruppenmitglieder ihre
+                            Entscheidungen treffen. Aus diesem Grund begrenzen wir die Zeit, die jeder Teilnehmer für seine oder ihre
+                            Entscheidung hat, auf fünf Minuten in der ersten Runde und zweieinhalb Minuten in den folgenden Runden.
+                            Wenn ein Teilnehmer diese Zeitgrenze überschreitet, scheidet er oder sie aus der Studie aus und wird
+                            durch einen Bot ersetzt, um eine reibungslose Erfahrung für alle anderen Gruppenmitglieder zu gewährleisten.
+                            Sie werden benachrichtigt, wenn das passiert.
                         </p>
 
                         <p>
-                            All your decisions will be treated confidentially. This means that
-                            none of the other participants will know who you are and which decisions you made.
-                            Likewise, you will not be able to learn the identity of your group members.
-                            Whereas we will provide some information about each participant's previous decision,
-                            we will mask them to establish anonymity.
+                            Alle Ihre Entscheidungen werden vertraulich behandelt. Das bedeutet, dass
+                            keiner der anderen Teilnehmer wissen wird, wer Sie sind.
+                            Ebenso werden Sie nicht in der Lage sein, die Identität Ihrer Gruppenmitglieder zu erfahren.
                         </p>
 
                         <p>
-                            Before the first period, each participant will be given an
-                            <u>initial endowment of {{ session.config.initial_endowment }} tokens</u>.
+                            Vor der ersten Runde erhält jeder Teilnehmer eine
+                            <u>anfängliche Ausstattung von {{ session.config.initial_endowment }} Punkten</u>.
                         </p>
 
                         <hr class="">
@@ -152,7 +148,7 @@
 
                         <div class="d-flex justify-content-center mt-5 mb-3">
                             <button class="btn btn-outline-primary" type="submit" id="submitButton">
-                                Submit
+                                Weiter
                             </button>
                         </div>
                     </div>
@@ -165,7 +161,7 @@
     <!-- Instructions Offcanvas -->
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasInstructions" aria-labelledby="offcanvasInstructionsLabel">
             <div class="offcanvas-header">
-                <h4 class="offcanvas-title" id="offcanvasInstructionsLabel">Instructions</h4>
+                <h4 class="offcanvas-title" id="offcanvasInstructionsLabel">Instruktionen</h4>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
@@ -174,7 +170,7 @@
                 </div>
 
                 <h4 class="mt-5">
-                    Events
+                    Ereignisse
                 </h4>
                 <div>
                     {{ include C.SHOCKS_TEMPLATE }}
@@ -185,63 +181,63 @@
     <!-- Calculator Offcanvas -->
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCalculator" aria-labelledby="offcanvasCalculatorLabel" style="min-width: 25vw;">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasCalculatorLabel">Calculator</h5>
+                <h5 class="offcanvas-title" id="offcanvasCalculatorLabel">Rechner</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <div>
-                    This calculator is designed to guide your decision. Given a return rate of approximately {{ min_mpcr }}% as well as
-                    your intended allocation, you can make an assumption about the other players' average allocation and
-                    whether a shock will occur to calculate your return.
+                    Dieser Rechner soll Sie bei Ihren Entscheidungen unterstützen. Wenn Sie annehmen, dass Sie einen Anteil von {{ min_mpcr }}% aller Punkte des Gruppenkontos erhalten,
+                    dann können Sie Ihre beabsichtigte Allokation sowie eine Annahme über die durchschnittliche Allokation der anderen Spieler eingeben,
+                    um die Punkte zu berechnen, die Sie aus dem Gruppenkonto ausgezahlt bekämen.
                 </div>
 
 
                 <div class="form-check form-switch mt-4">
                     <input class="form-check-input" type="checkbox" role="switch" id="eweFlexSwitch">
-                    <label class="form-check-label" for="eweFlexSwitch">Assume an event occurs?</label>
+                    <label class="form-check-label" for="eweFlexSwitch">Annehmen, dass ein Ereignis eintritt?</label>
                 </div>
                 <div class="form-floating mt-2">
                     <input type="number" class="form-control" id="othersContributions" placeholder="0" value="0" min="0">
-                    <label for="othersContributions">Other players' average allocation</label>
+                    <label for="othersContributions">Durchschnittliche Allokation der anderen Spieler</label>
                 </div>
                 <div class="form-floating mt-2">
                     <input type="number" class="form-control" id="yourContribution" placeholder="0" value="0" min="0">
-                    <label for="yourContribution">Your intended allocation</label>
+                    <label for="yourContribution">Ihre beabsichtigte Allokation</label>
                 </div>
                 <div class="form-floating mt-2">
                     <input type="number" class="form-control" id="yourReturn" placeholder="0" value="0" min="0" disabled>
-                    <label for="yourContribution">Your expected return</label>
+                    <label for="yourContribution">Ihre erwartete Rendite</label>
                 </div>
                 <button type="button" id="calculator_button" class="btn-primary btn mt-2 w-100" disabled>
-                    Calculate
+                    Berechnen
                 </button>
                 <small class="text-danger">
-                    The calculator is disabled in this instructions-stage. It will be enabled on the decision screen.
+                    Der Rechner ist in dieser Instruktionsphase deaktiviert. Er wird auf dem Entscheidungsbildschirm aktiviert.
                 </small>
 
-                <p class="h6 mt-5"> Further details <small>given the return rate of approximately {{min_mpcr}}%</small></p>
+                <p class="h6 mt-5"> Weitere Details <small>gegeben die Rendite von etwa {{min_mpcr}}%</small></p>
                 <div class="table-responsive mt-2">
                     <table class="table table-hover">
                         <thead>
                         </thead>
                         <tr>
-                            <td> Your current endowment </td>
+                            <td> Ihre aktuelle Ausstattung </td>
                             <td> {{ session.config.initial_endowment }} </td>
                         </tr>
                         <tr>
-                            <td> Others' average allocation</td>
+                            <td> Durchschnittliche Allokation der anderen</td>
                             <td id="othersContributionsTable"> 0 </td>
                         </tr>
                         <tr>
-                            <td> Your intended allocation</td>
+                            <td> Ihre beabsichtigte Allokation</td>
                             <td id="yourContributionTable"> 0 </td>
                         </tr>
                         <tr>
-                            <td> Your expected return</td>
+                            <td> Ihre erwartete Rendite</td>
                             <td id="yourReturnTable"> 0 </td>
                         </tr>
                         <thead>
-                        <td> Your expected endowment </td>
+                        <td> Ihre erwartete Ausstattung </td>
                         <td id="yourEndowmentTable">{{ session.config.initial_endowment }}</td>
                         </thead>
                     </table>

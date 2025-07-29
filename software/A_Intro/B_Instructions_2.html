@@ -25,7 +25,7 @@
     <!-- Header -->
     <nav class="navbar navbar-inverse sticky-top bg-white border-bottom justify-content-between" style="z-index:1">
         <h5 class="text-center">
-            Instructions
+            Instruktionen
         </h5>
         <div class="me-2 text-secondary" style="cursor: pointer;">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="dark" class="bi bi-calculator" viewBox="0 0 16 16" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCalculator" aria-controls="offcanvasCalculator" id="calculator_icon">
@@ -49,7 +49,7 @@
                         <h4 class="mt-3">
 
                         </h4>
-                        
+
                        {{ include C.EARNINGS_TEMPLATE }}
 
                         <hr class="">
@@ -61,7 +61,7 @@
 
                         <div class="d-flex justify-content-center mt-5 mb-3">
                             <button class="btn btn-outline-primary" type="submit" id="submitButton">
-                                Submit
+                                Weiter
                             </button>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
     <!-- Instructions Offcanvas -->
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasInstructions" aria-labelledby="offcanvasInstructionsLabel">
             <div class="offcanvas-header">
-                <h4 class="offcanvas-title" id="offcanvasInstructionsLabel">Instructions</h4>
+                <h4 class="offcanvas-title" id="offcanvasInstructionsLabel">Instruktionen</h4>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
@@ -83,7 +83,7 @@
                 </div>
 
                 <h4 class="mt-5">
-                    Events
+                    Ereignisse
                 </h4>
                 <div>
                     {{ include C.SHOCKS_TEMPLATE }}
@@ -94,63 +94,63 @@
     <!-- Calculator Offcanvas -->
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCalculator" aria-labelledby="offcanvasCalculatorLabel" style="min-width: 25vw;">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasCalculatorLabel">Calculator</h5>
+                <h5 class="offcanvas-title" id="offcanvasCalculatorLabel">Rechner</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <div>
-                    This calculator is designed to guide your decision. Given a return rate of approximately {{ min_mpcr }}% as well as
-                    your intended allocation, you can make an assumption about the other players' average allocation and
-                    whether a shock will occur to calculate your return.
+                    Dieser Rechner soll Sie bei Ihrer Entscheidung unterstützen. Gegeben eine Rendite von etwa {{ min_mpcr }}% sowie
+                    Ihrer beabsichtigten Allokation können Sie eine Annahme über die durchschnittliche Allokation der anderen Spieler treffen und
+                    ob ein Ereignis eintreten wird, um Ihre Rendite zu berechnen.
                 </div>
 
 
                 <div class="form-check form-switch mt-4">
                     <input class="form-check-input" type="checkbox" role="switch" id="eweFlexSwitch">
-                    <label class="form-check-label" for="eweFlexSwitch">Assume an event occurs?</label>
+                    <label class="form-check-label" for="eweFlexSwitch">Annehmen, dass ein Ereignis eintritt?</label>
                 </div>
                 <div class="form-floating mt-2">
                     <input type="number" class="form-control" id="othersContributions" placeholder="0" value="0" min="0">
-                    <label for="othersContributions">Other players' average allocation</label>
+                    <label for="othersContributions">Durchschnittliche Allokation der anderen Spieler</label>
                 </div>
                 <div class="form-floating mt-2">
                     <input type="number" class="form-control" id="yourContribution" placeholder="0" value="0" min="0">
-                    <label for="yourContribution">Your intended allocation</label>
+                    <label for="yourContribution">Ihre beabsichtigte Allokation</label>
                 </div>
                 <div class="form-floating mt-2">
                     <input type="number" class="form-control" id="yourReturn" placeholder="0" value="0" min="0" disabled>
-                    <label for="yourContribution">Your expected return</label>
+                    <label for="yourContribution">Ihre erwartete Rendite</label>
                 </div>
                 <button type="button" id="calculator_button" class="btn-primary btn mt-2 w-100" disabled>
-                    Calculate
+                    Berechnen
                 </button>
                 <small class="text-danger">
-                    The calculator is disabled in this instructions-stage. It will be enabled on the decision screen.
+                    Der Rechner ist in dieser Instruktionsphase deaktiviert. Er wird auf dem Entscheidungsbildschirm aktiviert.
                 </small>
 
-                <p class="h6 mt-5"> Further details <small>given the return rate of approximately {{min_mpcr}}%</small></p>
+                <p class="h6 mt-5"> Weitere Details <small>gegeben die Rendite von etwa {{min_mpcr}}%</small></p>
                 <div class="table-responsive mt-2">
                     <table class="table table-hover">
                         <thead>
                         </thead>
                         <tr>
-                            <td> Your current endowment </td>
+                            <td> Ihre aktuelle Ausstattung </td>
                             <td> {{ session.config.initial_endowment }} </td>
                         </tr>
                         <tr>
-                            <td> Others' average allocation</td>
+                            <td> Durchschnittliche Allokation der anderen</td>
                             <td id="othersContributionsTable"> 0 </td>
                         </tr>
                         <tr>
-                            <td> Your intended allocation</td>
+                            <td> Ihre beabsichtigte Allokation</td>
                             <td id="yourContributionTable"> 0 </td>
                         </tr>
                         <tr>
-                            <td> Your expected return</td>
+                            <td> Ihre erwartete Rendite</td>
                             <td id="yourReturnTable"> 0 </td>
                         </tr>
                         <thead>
-                        <td> Your expected endowment </td>
+                        <td> Ihre erwartete Ausstattung </td>
                         <td id="yourEndowmentTable">{{ session.config.initial_endowment }}</td>
                         </thead>
                     </table>

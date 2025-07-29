@@ -312,7 +312,7 @@ class D_Results(Page):
 
 
 page_sequence = [A_InitialWaitPage,
-                 A_InitialPage,
+                 # A_InitialPage,
                  B_Decision,
                  C_ResultsWaitPage,
                  D_Results]
