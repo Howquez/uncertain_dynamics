@@ -7,15 +7,4 @@
     <p class="lead">
         Sie werden nun mit anderen Teilnehmern zusammengebracht, um eine Gruppe zu bilden. Dies kann einige Minuten dauern.
     </p>
-    <p>
-        <small>
-            {{ if player.wait_time_left > 1 }}
-            Falls dieser Prozess länger als {{ player.wait_time_left }} Minuten dauert,
-            {{ else }}
-            Falls dieser Prozess länger als eine weitere Minute dauert,
-            {{ endif }}
-            werden Sie zum Ende der Studie weitergeleitet. In diesem Fall belohnen wir Sie mit einem Geduldsbonus von
-            {{ C.PATIENCE_BONUS }} Punkten.
-        </small>
-    </p>
 {{ endblock }}

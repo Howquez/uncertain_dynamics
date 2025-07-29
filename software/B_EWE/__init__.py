@@ -63,20 +63,15 @@ class Player(BasePlayer):
 def creating_session(subsession):
     for player in subsession.get_players():
         player.participant.is_dropout = False
+    if subsession.round_number == 1:
+        subsession.group_randomly()
+    else:
+        subsession.group_like_round(1)
 
 def waiting_too_long(player):
     participant = player.participant
     # assumes you set wait_page_arrival in PARTICIPANT_FIELDS.
     return time.time() - participant.wait_page_arrival > C.PATIENCE*60
-
-def group_by_arrival_time_method(subsession, waiting_players):
-    if len(waiting_players) >= C.PLAYERS_PER_GROUP:
-        return waiting_players[:C.PLAYERS_PER_GROUP]
-    for player in waiting_players:
-        player.wait_time_left = int(math.ceil(C.PATIENCE - (time.time() - player.participant.wait_page_arrival) / 60))
-        if waiting_too_long(player):
-            player.participant.waited_too_long = True
-            return [player]
 
 def contribution_max(player: Player):
     if player.round_number == 1:
@@ -159,8 +154,6 @@ def set_payoffs(group: Group):
 
 # PAGES
 class A_InitialWaitPage(WaitPage):
-    template_name = "B_EWE/A_InitialWaitPage.html"
-    group_by_arrival_time = True
 
     @staticmethod
     def is_displayed(player):
