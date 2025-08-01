@@ -37,6 +37,7 @@ class Group(BaseGroup):
     wealth = models.IntegerField(doc="sum of endowments at the beginning of a round")
     # extreme weather variables
     damage_prob = models.FloatField(doc="describes the probability with which an even occurs.")
+    treatment = models.StringField(doc="treatment variable.")
     EWE = models.BooleanField(initial=False, doc="if true, extreme weather event occurred")
     damage_factor = models.FloatField(doc="how much of an individual's income will be destroyed by an EWE")
     bot_active_in_next_round = models.BooleanField(initial=False, doc="indicates whether a bot is active due to another group member's timeout.")
@@ -165,6 +166,12 @@ class A_InitialWaitPage(WaitPage):
         selected_prob = probs[player.group.id_in_subsession % 2]
         player.participant.damage_prob = selected_prob
         player.group.damage_prob = selected_prob
+
+        # create more descriptive treatment variable
+        if player.group.damage_prob == 0:
+            player.group.treatment = "no_risk"
+        else:
+            player.group.treatment = "risk"
 
         if player.participant.waited_too_long == True:
             player.participant.vars["dPGG_payoff"] = C.PATIENCE_BONUS
