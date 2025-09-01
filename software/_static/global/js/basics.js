@@ -8,7 +8,6 @@ let num_players = js_vars.num_players || 4;
 let stock = js_vars.stock || 0;
 let factor = js_vars.factor || 0;
 let current_round  = js_vars.current_round || 0;
-let timeout  = js_vars.timeout || 999999999999;
 let wealth = js_vars.wealth || 0;
 let damage = js_vars.damage || 0;
 

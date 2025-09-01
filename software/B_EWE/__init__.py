@@ -17,11 +17,8 @@ class C(BaseConstants):
     NUM_ROUNDS = 10
     EARNINGS_TEMPLATE = "A_Intro/C_Earnings.html"
     SHOCKS_TEMPLATE = "A_Intro/D_Shocks.html"
-    PATIENCE = 7
-    PATIENCE_BONUS = 20
     # INITIAL_ENDOWMENT = 20 called initial_endowment in session configs
     EFFICIENCY_FACTOR = 1.5
-    TIMEOUT = 4
     DAMAGE = 0.5
 
 
@@ -68,11 +65,6 @@ def creating_session(subsession):
         subsession.group_randomly()
     else:
         subsession.group_like_round(1)
-
-def waiting_too_long(player):
-    participant = player.participant
-    # assumes you set wait_page_arrival in PARTICIPANT_FIELDS.
-    return time.time() - participant.wait_page_arrival > C.PATIENCE*60
 
 def contribution_max(player: Player):
     if player.round_number == 1:
@@ -143,13 +135,25 @@ def set_payoffs(group: Group):
         p.participant.stock.append(p.stock)
         # p.participant.vars["stock"].append(p.stock) # vars for visualization?
         # p.participant.vars["euros"].append(cu(p.stock).to_real_world_currency(group.session))
-        if p.round_number == 1:
-            p.payoff = cu(p.stock)
+        if p.participant.is_dropout:
+            p.payoff = 0
         else:
-            p.payoff = cu(p.gain)
+            if p.round_number == 1:
+                p.payoff = cu(p.stock)
+            elif p.round_number == C.NUM_ROUNDS: # we do this because we pretend as if the risk treatment had a different exchange rate. Hence, their income has to double at the end of the game.
+                if p.group.damage_prob == 0:
+                    p.payoff = cu(p.gain)
+                else:
+                    p.payoff = cu(p.gain + p.stock)
+
+            else:
+                p.payoff = cu(p.gain)
         # store payoff in participant var to display it across apps
         if group.round_number == C.NUM_ROUNDS:
-            p.participant.vars["dPGG_payoff"] = cu(p.stock).to_real_world_currency(group.session)
+            if p.group.damage_prob == 0:
+                p.participant.vars["dPGG_payoff"] = cu(p.stock).to_real_world_currency(group.session)
+            else:
+                p.participant.vars["dPGG_payoff"] = cu(2 * p.stock).to_real_world_currency(group.session)
             # p.participant.vars["showup_fee"] = group.session.config["participation_fee"]
 
 
@@ -178,26 +182,26 @@ class A_InitialWaitPage(WaitPage):
             player.participant.vars["mpl_payoff"] = 0
             return upcoming_apps[-1]
 
-class A_InitialPage(Page):
-    form_model = "player"
-
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == 1
-
-    @staticmethod
-    def get_timeout_seconds(player):
-        if player.participant.is_dropout:
-            return 1  # instant timeout, 1 second
-        else:
-            return 120
-
-    @staticmethod
-    def before_next_page(player, timeout_happened):
-        if timeout_happened:
-            player.dropout = True
-            player.participant.is_dropout = True
-            player.group.bot_active_in_next_round = True
+# class A_InitialPage(Page):
+#     form_model = "player"
+#
+#     @staticmethod
+#     def is_displayed(player):
+#         return player.round_number == 1
+#
+#     @staticmethod
+#     def get_timeout_seconds(player):
+#         if player.participant.is_dropout:
+#             return 1  # instant timeout, 1 second
+#         else:
+#             return 120
+#
+#     @staticmethod
+#     def before_next_page(player, timeout_happened):
+#         if timeout_happened:
+#             player.dropout = True
+#             player.participant.is_dropout = True
+#             player.group.bot_active_in_next_round = True
 
 
 class B_Decision(Page):
@@ -235,9 +239,7 @@ class B_Decision(Page):
 
     @staticmethod
     def js_vars(player: Player):
-        timeout = C.TIMEOUT
         if player.round_number == 1:
-            timeout = 2.5 * C.TIMEOUT
             stock = player.session.config["initial_endowment"]
             endowment = player.session.config["initial_endowment"]
             wealth = player.session.config["initial_endowment"] * C.PLAYERS_PER_GROUP
@@ -246,7 +248,6 @@ class B_Decision(Page):
             endowment = int(math.ceil(player.in_round(player.round_number - 1).stock))
             wealth = sum([p.in_round(p.round_number - 1).stock for p in player.group.get_players()])
         return dict(
-            timeout=timeout,
             template="decision",
             current_round=player.round_number,
             stock=stock,
@@ -309,10 +310,12 @@ class D_Results(Page):
             num_rounds=C.NUM_ROUNDS,
 
         )
+        @staticmethod
+        def before_next_page(player, timeout_happened):
+            player.payoff
 
 
 page_sequence = [A_InitialWaitPage,
-                 # A_InitialPage,
                  B_Decision,
                  C_ResultsWaitPage,
                  D_Results]

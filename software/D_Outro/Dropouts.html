@@ -7,8 +7,7 @@
     <!-- Decision Card -->
     <div class="card mt-5 shadow-lg">
         <div class="card-body">
-            <h1 class="display-4">Vielen Dank!</h1>
-            <p class="lead">Wir schätzen Ihre Teilnahme sehr.</p>
+            <h1 class="display-4">Vielen Dank.</h1>
 
             <table class="table mt-5 mb-5 table-responsive">
                 <tbody>
@@ -23,25 +22,10 @@
                     <tr>
                         <th scope="row">Verdienst</th>
                         <td class="text-secondary">
-                            {{ if participant.vars.is_dropout }}
                              <small>
-                                 Leider sind Sie aus dem Experiment ausgeschieden. Aus diesem Grund konnten wir keine Daten von Ihnen oder Ihren Gruppenmitgliedern erheben und können Sie nicht entschädigen.
+                                 Leider sind Sie aus dem Experiment ausgeschieden.
+                                 Aus diesem Grund konnten wir keine Daten von Ihnen oder Ihren Gruppenmitgliedern erheben und können Sie nicht entschädigen.
                             </small>
-                            {{ else }}
-                                {{ if participant.vars.waited_too_long }}
-                                <small>
-                                    Vielen Dank für Ihre Geduld. Sie erhalten eine feste Teilnahmegebühr von {{ session.config.participation_fee }}
-                                    sowie den versprochenen Bonus für Ihre Geduld.
-                                </small>
-                                {{ else }}
-                                 <small>
-                                    Sie erhalten eine feste Gebühr von {{ session.config.participation_fee }} für
-                                    Ihre Teilnahme. Zusätzlich verdienen Sie {{ participant.vars.dPGG_payoff }} als
-                                    Ergebnis des Gruppenexperiments sowie {{ participant.vars.mpl_payoff }} für die andere Aufgabe.
-                                    Dies ergibt eine Gesamtauszahlung von {{ final_payoff }}.
-                                </small>
-                                {{ endif }}
-                            {{ endif }}
                         </td>
                     </tr>
                     <tr>

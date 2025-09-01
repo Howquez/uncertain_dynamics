@@ -123,10 +123,26 @@ class Debriefing(Page):
     form_model = 'player'
 
     @staticmethod
+    def is_displayed(player):
+        if player.participant.is_dropout == True:
+            return False
+        else:
+            return True
+
+    @staticmethod
     def vars_for_template(player: Player):
         return dict(
             final_payoff=player.participant.payoff_plus_participation_fee().to_real_world_currency(player.session),
         )
 
+class Dropouts(Page):
+    form_model = 'player'
 
-page_sequence = [Open_Text, Covariates, Demographics, Debriefing]
+    @staticmethod
+    def is_displayed(player):
+        if player.participant.is_dropout == True:
+            return True
+
+
+
+page_sequence = [Open_Text, Covariates, Demographics, Debriefing, Dropouts]

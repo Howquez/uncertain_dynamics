@@ -40,9 +40,9 @@ class Player(BasePlayer):
 
     CQ_2 = models.BooleanField(label='Welche der folgenden Aussagen ist richtig?',
                                choices=[
-                                   [True, 'Ich werde zehn Perioden spielen und dabei mit drei anderen Teilnehmern zusammengebracht.'],
-                                   [False, 'Ich werde mit zehn Teilnehmern zusammengebracht und vier Perioden spielen.'],
-                                   [False, 'Ich werde zehn Perioden spielen und dabei mit vier anderen Teilnehmern zusammengebracht.'],
+                                   [True, 'Ich werde zehn Perioden spielen und dabei mit drei anderen Teilnehmern interagieren.'],
+                                   [False, 'Ich werde mit zehn Teilnehmern interagieren und vier Perioden spielen.'],
+                                   [False, 'Ich werde zehn Perioden spielen und dabei mit vier anderen Teilnehmern interagieren.'],
                                    [False, 'Keine der obigen Aussagen ist wahr.']
                                ],
                                blank=False)
@@ -51,8 +51,8 @@ class Player(BasePlayer):
                                choices=[
                                    [False, 'Egal was passiert, ich erhalte in jeder Periode eine Ausstattung von 20 Punkten.'],
                                    [False, 'Meine Verdienste in den vorherigen Perioden werden meine Ausstattung der aktuellen Periode nicht beeinflussen.'],
-                                   [True, 'Je höher meine Ausstattung (im Vergleich zu anderen), desto niedriger meine Rendite aus dem Gruppenkonto.'],
-                                   [False, 'Ich erhalte eine Rendite auf genau die Anzahl der Punkte, die ich auf das Gruppenkonto ausgezahlt habe.']
+                                   [True, 'Je höher meine Ausstattung (im Vergleich zu anderen), desto niedriger meine Ausschüttungsrate für Gruppenkonto.'],
+                                   [False, 'Ich erhalte eine Ausschüttungsrate für genau die Anzahl der Punkte, die ich auf das Gruppenkonto ausgezahlt habe.']
                                ])
 
     CQ_4 = models.BooleanField(label='Welcher Teil der folgenden Aussage ist FALSCH?',

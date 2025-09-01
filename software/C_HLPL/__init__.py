@@ -66,11 +66,17 @@ def set_payoffs(player: Player):
     player.option_to_pay = getattr(player, player.choice_to_pay)
     if player.option_to_pay == "lottery":
         if player.random_draw <= 50:
-            player.payoff = Constants.lottery_price
+            payoff = Constants.lottery_price
         else:
-            player.payoff = 0
+            payoff = 0
     else:
-        player.payoff = (player.participant.vars["mpl_index_to_pay"]-1) * 5
+        payoff = (player.participant.vars["mpl_index_to_pay"]-1) * 5
+
+    if player.participant.damage_prob == 0:
+        player.payoff = payoff
+    else:
+        player.payoff = 2 * payoff
+
     player.participant.vars["mpl_payoff"] = cu(player.payoff).to_real_world_currency(player.session)
 
 

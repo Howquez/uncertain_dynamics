@@ -22,7 +22,8 @@ SESSION_CONFIGS = [
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=0.04,
     participation_fee=1.00,
-    timeout_seconds = [300, 180, 150, 150, 150, 150, 150, 150, 150, 150],
+    timeout_seconds=[480, 420, 240, 240, 240, 240, 240, 240, 240, 240],
+    # timeout_seconds=[60, 420, 240, 240, 240, 240, 240, 240, 240, 240],
     doc=""
 )
 

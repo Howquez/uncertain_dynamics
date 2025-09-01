@@ -52,17 +52,29 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
-                    <h4 class="mt-3">
-                        Die Ereigniswahrscheinlichkeit beträgt {{ risk }}%.
+                    <h4 class="my-4 text-secondary">
+                        Zusammenfassung
                     </h4>
                     <p class="text-secondary">
-                        Das bedeutet, dass in jeder Runde eine {{ risk }}%ige Wahrscheinlichkeit besteht, dass ein Ereignis (das potenziell
-                        Schaden verursacht) eintritt. {{ if risk == 0 }} Daher bleibt Ihr prozentualer Anteil am Gruppenkonto immer gleich. {{ endif }}
+                        <b class="text-dark">Die Ereigniswahrscheinlichkeit beträgt {{ risk }}%</b><br>
+                        Das bedeutet, dass in jeder Runde eine {{ risk }}%ige Wahrscheinlichkeit besteht, dass ein Ereignis (welches einen
+                        Schaden verursacht kann) eintritt. {{ if risk == 0 }} Daher bleibt Ihr prozentualer Anteil am Gruppenkonto immer gleich. {{ endif }}
+                        Wir präsentieren die Wahrscheinlichkeit oben auf Ihrem Bildschirm.
                     </p>
                     <p class="text-secondary">
-                        Wir präsentieren die Wahrscheinlichkeit oben auf Ihrem Bildschirm.
-                        Falls Sie weitere Fragen haben, lesen Sie bitte die Instruktionen, indem Sie auf das
-                        <i class="bi bi-info-circle-fill"></i>-Symbol oben rechts auf Ihrem Bildschirm klicken.
+                        <b class="text-dark">Umrechnung von Punkten zu Euro</b><br>
+                        Während der gesamten Studie treffen Sie Entscheidungen, um Punkte zu verdienen.
+                        Am Ende der Studie werden alle Punkte zusammengerechnet und ausgezahlt.
+                        1 Punkt ist dabei {{ if group.treatment == "risk" }} 0.08 {{ else }} 0.04 {{ endif }} € wert.
+                    </p>
+                    <p class="text-secondary">
+                        <b class="text-dark">Interaktionen</b><br>
+                        Dieser Teil der Studie besteht aus 10 Entscheidungsperioden.
+                        Sie interagieren dabei durchgängig mit denselben 3 Teilnehmern.
+                    </p>
+                    <p class="text-secondary">
+                        Zum erneuten Nachschlagen der Instruktionen klicken Sie auf das
+                        <i class="bi bi-info-circle-fill"></i>-Symbol oben rechts auf Ihrem Bildschirm.
                     </p>
                 </div>
                 <div class="d-flex justify-content-center modal-footer border-top-0">
